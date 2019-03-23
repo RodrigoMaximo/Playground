@@ -21,6 +21,7 @@
 		1F7FB1112245ECA000F8868B /* Resize+SKSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FB1102245ECA000F8868B /* Resize+SKSpriteNode.swift */; };
 		1F7FB1152245F34E00F8868B /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FB1142245F34E00F8868B /* Scale.swift */; };
 		1F7FB1172245F5CA00F8868B /* CustomScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FB1162245F5CA00F8868B /* CustomScene.swift */; };
+		1F7FB11F22461A7900F8868B /* Animate+SKSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FB11E22461A7900F8868B /* Animate+SKSpriteNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		1F7FB1102245ECA000F8868B /* Resize+SKSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Resize+SKSpriteNode.swift"; sourceTree = "<group>"; };
 		1F7FB1142245F34E00F8868B /* Scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scale.swift; sourceTree = "<group>"; };
 		1F7FB1162245F5CA00F8868B /* CustomScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScene.swift; sourceTree = "<group>"; };
+		1F7FB11E22461A7900F8868B /* Animate+SKSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Animate+SKSpriteNode.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				1F7FB1102245ECA000F8868B /* Resize+SKSpriteNode.swift */,
+				1F7FB11E22461A7900F8868B /* Animate+SKSpriteNode.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				1F7FB1112245ECA000F8868B /* Resize+SKSpriteNode.swift in Sources */,
 				1F1603682240928500BE48EC /* GameViewController.swift in Sources */,
 				1F7FB1172245F5CA00F8868B /* CustomScene.swift in Sources */,
+				1F7FB11F22461A7900F8868B /* Animate+SKSpriteNode.swift in Sources */,
 				1F7FB1152245F34E00F8868B /* Scale.swift in Sources */,
 				1F1603602240928500BE48EC /* AppDelegate.swift in Sources */,
 			);

@@ -19,6 +19,8 @@ class PlanetCardScene: SKScene, CustomScene {
         case four
     }
     
+    private let kTimePerFrame: TimeInterval = 0.5
+    
     var backgroundNode: SKSpriteNode!
     var skyNode: SKEmitterNode!
     var planetNode: SKSpriteNode!
@@ -33,39 +35,26 @@ class PlanetCardScene: SKScene, CustomScene {
         planetNode = backgroundNode.childNode(withName: "planetNode") as? SKSpriteNode
     }
     
-    func animatePlanet(for stage: Stage) {
+    func animatePlanet(for stage: Stage, completion: (() -> Void)? = nil) {
         switch stage {
         case .one:
-            animatePlanetStageOne()
+            animatePlanet(forImageName: "sad-planet", completion: completion)
         case .two:
-            animatePlanetStageTwo()
+            animatePlanet(forImageName: "low-sad-planet", completion: completion)
         case .three:
-            animatePlanetStageThree()
+            animatePlanet(forImageName: "low-happy-planet", completion: completion)
         case .four:
-            animatePlanetStageFour()
+            animatePlanet(forImageName: "happy-planet", completion: completion)
         }
     }
     
-    private func animatePlanetStageOne() {
-        
-    }
-    
-    private func animatePlanetStageTwo() {
-        
-    }
-    
-    private func animatePlanetStageThree() {
-        planetNode.texture = SKTexture(imageNamed: "happy-planet-1")
+    private func animatePlanet(forImageName imageName: String, completion: (() -> Void)?) {
+        let initialTexture = SKTexture(imageNamed: "\(imageName)-1")
         let textures = [
-            SKTexture(imageNamed: "happy-planet-2"),
-            SKTexture(imageNamed: "happy-planet-3"),
-            SKTexture(imageNamed: "happy-planet-4")
+            SKTexture(imageNamed: "\(imageName)-2"),
+            SKTexture(imageNamed: "\(imageName)-3"),
+            SKTexture(imageNamed: "\(imageName)-4")
         ]
-        let action = SKAction.animate(with: textures, timePerFrame: 0.3, resize: false, restore: false)
-        planetNode.run(SKAction.repeatForever(action))
-    }
-    
-    private func animatePlanetStageFour() {
-        
+        planetNode.animate(with: textures, initialTexture: initialTexture, timePerFrame: kTimePerFrame, completion: completion)
     }
 }

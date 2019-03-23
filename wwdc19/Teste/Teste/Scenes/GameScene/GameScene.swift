@@ -29,9 +29,23 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         setup()
-        let scale = Scale(x: 0.5, y: 0.5)
+        let scale = Scale(x: 1, y: 1)
         planetCardScene = PlanetCardScene.loadBackground(with: scale, addBackgroundIn: backgroundNode)
-        planetCardScene.animatePlanet(for: .three)
+        self.run(SKAction.wait(forDuration: 3)) { [weak self] in
+            self?.planetCardScene.animatePlanet(for: .one) {
+                self?.run(SKAction.wait(forDuration: 2)) {
+                    self?.planetCardScene.animatePlanet(for: .two) {
+                        self?.run(SKAction.wait(forDuration: 2)) {
+                            self?.planetCardScene.animatePlanet(for: .three) {
+                                self?.run(SKAction.wait(forDuration: 2)) {
+                                    self?.planetCardScene.animatePlanet(for: .four)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     private func setup() {
