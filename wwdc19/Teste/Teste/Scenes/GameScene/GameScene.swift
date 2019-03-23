@@ -25,7 +25,8 @@ class GameScene: SKScene {
     
     // MARK: - Nodes
     var planetCardScene: PlanetCardScene!
-    var backgroundNode: SKSpriteNode!
+    var planetBackgroundNode: SKSpriteNode!
+    var scenesBackgroundNode: SKSpriteNode!
     
     override func didMove(to view: SKView) {
         setup()
@@ -35,19 +36,19 @@ class GameScene: SKScene {
     }
     
     private func setup() {
-        setupBackgroundNode()
+        self.setScale(0.2)
+        setupBackgroundNodes()
         setupPlanetCardScene()
     }
     
-    private func setupBackgroundNode() {
-        backgroundNode = self.childNode(withName: "backgroundNode") as? SKSpriteNode
-        backgroundNode.size = self.size
-        backgroundNode.setScale(0.3) // MARK: - Change to 1.0
+    private func setupBackgroundNodes() {
+        planetBackgroundNode = self.childNode(withName: "planetBackgroundNode") as? SKSpriteNode
+        scenesBackgroundNode = self.childNode(withName: "scenesBackgroundNode") as? SKSpriteNode
     }
     
     private func setupPlanetCardScene() {
         let scale = Scale(x: 1, y: 1)
-        planetCardScene = PlanetCardScene.loadBackground(with: scale, addBackgroundIn: backgroundNode)
+        planetCardScene = PlanetCardScene.loadBackground(with: scale, addBackgroundIn: planetBackgroundNode)
     }
     
     private func allPlanetAnimations(completion: Completion?) {
