@@ -9,7 +9,7 @@
 import Foundation
 import SpriteKit
 
-protocol CustomScene {
+protocol CustomScene where Self: SKScene {
     var backgroundNode: SKSpriteNode! { get set }
 }
 
@@ -48,7 +48,7 @@ extension CustomScene {
     ///   - scene: Scene that will add this backgroundNode.
     /// - Returns: A scene with the backgroundNode and all the other nodes references.
     static func loadBackground(with scale: Scale? = nil, addBackgroundIn scene: SKNode) -> Self? {
-        if let customScene = SKScene(fileNamed: String(describing: Self.self)) as? Self,
+        if let customScene = Self(fileNamed: String(describing: Self.self)),
             let backgroundNode = customScene.backgroundNode
         {
             backgroundNode.removeFromParent()

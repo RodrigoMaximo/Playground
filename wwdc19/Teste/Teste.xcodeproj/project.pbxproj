@@ -15,7 +15,6 @@
 		1F16036D2240928800BE48EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F16036C2240928800BE48EC /* Assets.xcassets */; };
 		1F1603702240928800BE48EC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F16036E2240928800BE48EC /* LaunchScreen.storyboard */; };
 		1F7FB1032245C3DB00F8868B /* PlanetCardScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F7FB1022245C3DB00F8868B /* PlanetCardScene.sks */; };
-		1F7FB10A2245C4C100F8868B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F7FB1082245C4C100F8868B /* Assets.xcassets */; };
 		1F7FB10C2245C50F00F8868B /* Stars.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F7FB10B2245C50F00F8868B /* Stars.sks */; };
 		1F7FB10E2245C92B00F8868B /* PlanetCardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FB10D2245C92B00F8868B /* PlanetCardScene.swift */; };
 		1F7FB1112245ECA000F8868B /* Resize+SKSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FB1102245ECA000F8868B /* Resize+SKSpriteNode.swift */; };
@@ -37,7 +36,6 @@
 		1F16036F2240928800BE48EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1F1603712240928800BE48EC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F7FB1022245C3DB00F8868B /* PlanetCardScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlanetCardScene.sks; sourceTree = "<group>"; };
-		1F7FB1082245C4C100F8868B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F7FB10B2245C50F00F8868B /* Stars.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Stars.sks; sourceTree = "<group>"; };
 		1F7FB10D2245C92B00F8868B /* PlanetCardScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetCardScene.swift; sourceTree = "<group>"; };
 		1F7FB1102245ECA000F8868B /* Resize+SKSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Resize+SKSpriteNode.swift"; sourceTree = "<group>"; };
@@ -95,7 +93,6 @@
 		1F7FB1062245C4AD00F8868B /* Particles */ = {
 			isa = PBXGroup;
 			children = (
-				1F7FB1082245C4C100F8868B /* Assets.xcassets */,
 				1F7FB10B2245C50F00F8868B /* Stars.sks */,
 			);
 			path = Particles;
@@ -211,7 +208,6 @@
 				1F1603622240928500BE48EC /* GameScene.sks in Resources */,
 				1F16036D2240928800BE48EC /* Assets.xcassets in Resources */,
 				1F1603702240928800BE48EC /* LaunchScreen.storyboard in Resources */,
-				1F7FB10A2245C4C100F8868B /* Assets.xcassets in Resources */,
 				1F7FB1032245C3DB00F8868B /* PlanetCardScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
