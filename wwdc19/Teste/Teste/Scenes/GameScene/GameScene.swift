@@ -28,17 +28,29 @@ class GameScene: SKScene {
     var planetBackgroundNode: SKSpriteNode!
     var scenesBackgroundNode: SKSpriteNode!
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let scene = self.scene!
+        let touch = touches.first!
+        let viewTouchLocation = touch.location(in: self)
+        let touchedNode = scene.atPoint(viewTouchLocation)
+        self.touchDown(touchedNode: touchedNode)
+    }
+    
     override func didMove(to view: SKView) {
+        super.didMove(to: view)
         setup()
-        allPlanetAnimations() { [weak self] in
-            self?.moveQuadrants()
-        }
     }
     
     private func setup() {
-        self.setScale(0.2)
         setupBackgroundNodes()
         setupPlanetCardScene()
+    }
+    
+    private func touchDown(touchedNode: SKNode) {
+        print(type(of: touchedNode))
+        allPlanetAnimations() { [weak self] in
+            self?.moveQuadrants()
+        }
     }
     
     private func setupBackgroundNodes() {
@@ -52,16 +64,14 @@ class GameScene: SKScene {
     }
     
     private func allPlanetAnimations(completion: Completion?) {
-        self.run(SKAction.wait(forDuration: 3)) { [weak self] in
-            self?.planetCardScene.animatePlanet(for: .one) {
-                self?.run(SKAction.wait(forDuration: 2)) {
-                    self?.planetCardScene.animatePlanet(for: .two) {
-                        self?.run(SKAction.wait(forDuration: 2)) {
-                            self?.planetCardScene.animatePlanet(for: .three) {
-                                self?.run(SKAction.wait(forDuration: 2)) {
-                                    self?.planetCardScene.animatePlanet(for: .four) {
-                                        completion?()
-                                    }
+        self.planetCardScene.animatePlanet(for: .one) { [weak self] in
+            self?.run(SKAction.wait(forDuration: 2)) {
+                self?.planetCardScene.animatePlanet(for: .two) {
+                    self?.run(SKAction.wait(forDuration: 2)) {
+                        self?.planetCardScene.animatePlanet(for: .three) {
+                            self?.run(SKAction.wait(forDuration: 2)) {
+                                self?.planetCardScene.animatePlanet(for: .four) {
+                                    completion?()
                                 }
                             }
                         }

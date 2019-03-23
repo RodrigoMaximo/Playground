@@ -26,6 +26,7 @@ class PlanetCardScene: SKScene, CustomScene {
     var planetNode: SKSpriteNode!
     
     override func sceneDidLoad() {
+        super.sceneDidLoad()
         loadCard()
     }
     
@@ -33,6 +34,9 @@ class PlanetCardScene: SKScene, CustomScene {
         backgroundNode = self.childNode(withName: "backgroundNode") as? SKSpriteNode
         skyNode = backgroundNode.childNode(withName: "skyNode") as? SKEmitterNode
         planetNode = backgroundNode.childNode(withName: "planetNode") as? SKSpriteNode
+        skyNode.isPaused = false
+        skyNode.particleZPosition = 5
+        skyNode.targetNode = backgroundNode
     }
     
     func animatePlanet(for stage: Stage, completion: Completion? = nil) {
