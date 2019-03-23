@@ -6,6 +6,7 @@
 //  Copyright © 2019 Rodrigo Maximo. All rights reserved.
 //
 
+import Foundation
 import SpriteKit
 import GameplayKit
 import AVFoundation
@@ -24,12 +25,21 @@ class GameScene: SKScene {
     
     // MARK: - Nodes
     var planetCardScene: PlanetCardScene!
+    var backgroundNode: SKSpriteNode!
     
     override func didMove(to view: SKView) {
-        let size = CGSize(width: 350, height: 400)
-        planetCardScene = PlanetCardScene.loadBackground(size: size, addBackgroundIn: self)
+        setup()
+        let scale = Scale(x: 0.5, y: 0.5)
+        planetCardScene = PlanetCardScene.loadBackground(with: scale, addBackgroundIn: backgroundNode)
         planetCardScene.animatePlanet(for: .three)
     }
+    
+    private func setup() {
+        backgroundNode = self.childNode(withName: "backgroundNode") as? SKSpriteNode
+    }
+    
+    
+    // MARK: - Old code
     
     private func atlasAnimation() {
         

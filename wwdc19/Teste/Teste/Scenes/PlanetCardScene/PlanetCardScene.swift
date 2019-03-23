@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 import AVFoundation
 
-class PlanetCardScene: SKScene {
+class PlanetCardScene: SKScene, CustomScene {
     
     enum Stage {
         case one
@@ -67,20 +67,5 @@ class PlanetCardScene: SKScene {
     
     private func animatePlanetStageFour() {
         
-    }
-}
-
-// MARK: - Load scene
-extension PlanetCardScene {
-    static func loadBackground(size: CGSize? = nil, addBackgroundIn scene: SKScene) -> PlanetCardScene? {
-        if let planetCardScene = SKScene(fileNamed: "PlanetCardScene") as? PlanetCardScene,
-            let backgroundNode = planetCardScene.backgroundNode
-        {
-            backgroundNode.removeFromParent()
-            backgroundNode.resize(with: size)
-            scene.addChild(backgroundNode)
-            return planetCardScene
-        }
-        return nil
     }
 }

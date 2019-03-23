@@ -16,4 +16,12 @@ extension SKSpriteNode {
         self.xScale = xScale
         self.yScale = yScale
     }
+    
+    func resize(with scale: Scale?) {
+        guard let scale = scale else { return }
+        self.xScale = scale.x
+        self.yScale = scale.y
+    }
 }
+
+

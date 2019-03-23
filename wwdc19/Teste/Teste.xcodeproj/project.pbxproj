@@ -19,6 +19,8 @@
 		1F7FB10C2245C50F00F8868B /* Stars.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F7FB10B2245C50F00F8868B /* Stars.sks */; };
 		1F7FB10E2245C92B00F8868B /* PlanetCardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FB10D2245C92B00F8868B /* PlanetCardScene.swift */; };
 		1F7FB1112245ECA000F8868B /* Resize+SKSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FB1102245ECA000F8868B /* Resize+SKSpriteNode.swift */; };
+		1F7FB1152245F34E00F8868B /* Scale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FB1142245F34E00F8868B /* Scale.swift */; };
+		1F7FB1172245F5CA00F8868B /* CustomScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FB1162245F5CA00F8868B /* CustomScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		1F7FB10B2245C50F00F8868B /* Stars.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Stars.sks; sourceTree = "<group>"; };
 		1F7FB10D2245C92B00F8868B /* PlanetCardScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetCardScene.swift; sourceTree = "<group>"; };
 		1F7FB1102245ECA000F8868B /* Resize+SKSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Resize+SKSpriteNode.swift"; sourceTree = "<group>"; };
+		1F7FB1142245F34E00F8868B /* Scale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scale.swift; sourceTree = "<group>"; };
+		1F7FB1162245F5CA00F8868B /* CustomScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,18 +72,16 @@
 		1F16035E2240928500BE48EC /* Teste */ = {
 			isa = PBXGroup;
 			children = (
-				1F7FB10F2245EC8900F8868B /* Extensions */,
-				1F7FB1062245C4AD00F8868B /* Particles */,
-				1F16035F2240928500BE48EC /* AppDelegate.swift */,
-				1F1603612240928500BE48EC /* GameScene.sks */,
-				1F1603652240928500BE48EC /* GameScene.swift */,
-				1F7FB1022245C3DB00F8868B /* PlanetCardScene.sks */,
-				1F7FB10D2245C92B00F8868B /* PlanetCardScene.swift */,
-				1F1603672240928500BE48EC /* GameViewController.swift */,
-				1F1603692240928500BE48EC /* Main.storyboard */,
+				1F1603712240928800BE48EC /* Info.plist */,
 				1F16036C2240928800BE48EC /* Assets.xcassets */,
 				1F16036E2240928800BE48EC /* LaunchScreen.storyboard */,
-				1F1603712240928800BE48EC /* Info.plist */,
+				1F1603692240928500BE48EC /* Main.storyboard */,
+				1F1603672240928500BE48EC /* GameViewController.swift */,
+				1F16035F2240928500BE48EC /* AppDelegate.swift */,
+				1F7FB10F2245EC8900F8868B /* Extensions */,
+				1F7FB11A2245F60600F8868B /* Model */,
+				1F7FB1062245C4AD00F8868B /* Particles */,
+				1F7FB11B2245F61F00F8868B /* Scenes */,
 			);
 			path = Teste;
 			sourceTree = "<group>";
@@ -99,6 +101,42 @@
 				1F7FB1102245ECA000F8868B /* Resize+SKSpriteNode.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1F7FB11A2245F60600F8868B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1F7FB1142245F34E00F8868B /* Scale.swift */,
+				1F7FB1162245F5CA00F8868B /* CustomScene.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1F7FB11B2245F61F00F8868B /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				1F7FB11D2245F63800F8868B /* PlanetCardScene */,
+				1F7FB11C2245F63000F8868B /* GameScene */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		1F7FB11C2245F63000F8868B /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
+				1F1603612240928500BE48EC /* GameScene.sks */,
+				1F1603652240928500BE48EC /* GameScene.swift */,
+			);
+			path = GameScene;
+			sourceTree = "<group>";
+		};
+		1F7FB11D2245F63800F8868B /* PlanetCardScene */ = {
+			isa = PBXGroup;
+			children = (
+				1F7FB1022245C3DB00F8868B /* PlanetCardScene.sks */,
+				1F7FB10D2245C92B00F8868B /* PlanetCardScene.swift */,
+			);
+			path = PlanetCardScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +218,8 @@
 				1F7FB10E2245C92B00F8868B /* PlanetCardScene.swift in Sources */,
 				1F7FB1112245ECA000F8868B /* Resize+SKSpriteNode.swift in Sources */,
 				1F1603682240928500BE48EC /* GameViewController.swift in Sources */,
+				1F7FB1172245F5CA00F8868B /* CustomScene.swift in Sources */,
+				1F7FB1152245F34E00F8868B /* Scale.swift in Sources */,
 				1F1603602240928500BE48EC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
