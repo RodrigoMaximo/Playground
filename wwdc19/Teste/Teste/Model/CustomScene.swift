@@ -14,6 +14,33 @@ protocol CustomScene {
 }
 
 extension CustomScene {
+    
+    func animateMoveTo(quadrant: Quadrant, duration: TimeInterval, completion: Completion?) {
+        let finalScale = Quadrant.scale
+        let finalPoint = quadrant.coordinates(size: backgroundNode.size)
+        animateMoveTo(point: finalPoint, finalScale: finalScale, duration: duration, completion: completion)
+    }
+    
+    func animateMoveToOrigin(duration: TimeInterval, completion: Completion?) {
+        let finalScale: CGFloat = 1.0
+        let origin = CGPoint(x: 0, y: 0)
+        animateMoveTo(point: origin, finalScale: finalScale, duration: duration, completion: completion)
+    }
+    
+    fileprivate func animateMoveTo(point: CGPoint, finalScale: CGFloat, duration: TimeInterval, completion: Completion?) {
+        guard let backgroundNode = backgroundNode else { return }
+        let group = DispatchGroup()
+        group.enter()
+        backgroundNode.run(.move(to: point, duration: duration)) {
+            group.leave()
+        }
+        group.enter()
+        backgroundNode.run(.scale(to: finalScale, duration: duration)) {
+            group.leave()
+        }
+        group.notify(queue: DispatchQueue.main, execute: completion ?? {})
+    }
+    
     static func loadBackground(with scale: Scale? = nil, addBackgroundIn scene: SKNode) -> Self? {
         if let customScene = SKScene(fileNamed: String(describing: Self.self)) as? Self,
             let backgroundNode = customScene.backgroundNode

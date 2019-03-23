@@ -35,7 +35,7 @@ class PlanetCardScene: SKScene, CustomScene {
         planetNode = backgroundNode.childNode(withName: "planetNode") as? SKSpriteNode
     }
     
-    func animatePlanet(for stage: Stage, completion: (() -> Void)? = nil) {
+    func animatePlanet(for stage: Stage, completion: Completion? = nil) {
         switch stage {
         case .one:
             animatePlanet(forImageName: "sad-planet", completion: completion)
@@ -48,7 +48,7 @@ class PlanetCardScene: SKScene, CustomScene {
         }
     }
     
-    private func animatePlanet(forImageName imageName: String, completion: (() -> Void)?) {
+    private func animatePlanet(forImageName imageName: String, completion: Completion?) {
         let initialTexture = SKTexture(imageNamed: "\(imageName)-1")
         let textures = [
             SKTexture(imageNamed: "\(imageName)-2"),
