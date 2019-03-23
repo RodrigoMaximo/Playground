@@ -18,6 +18,7 @@
 		1F7FB10A2245C4C100F8868B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F7FB1082245C4C100F8868B /* Assets.xcassets */; };
 		1F7FB10C2245C50F00F8868B /* Stars.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F7FB10B2245C50F00F8868B /* Stars.sks */; };
 		1F7FB10E2245C92B00F8868B /* PlanetCardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FB10D2245C92B00F8868B /* PlanetCardScene.swift */; };
+		1F7FB1112245ECA000F8868B /* Resize+SKSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FB1102245ECA000F8868B /* Resize+SKSpriteNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		1F7FB1082245C4C100F8868B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F7FB10B2245C50F00F8868B /* Stars.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Stars.sks; sourceTree = "<group>"; };
 		1F7FB10D2245C92B00F8868B /* PlanetCardScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetCardScene.swift; sourceTree = "<group>"; };
+		1F7FB1102245ECA000F8868B /* Resize+SKSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Resize+SKSpriteNode.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 		1F16035E2240928500BE48EC /* Teste */ = {
 			isa = PBXGroup;
 			children = (
+				1F7FB10F2245EC8900F8868B /* Extensions */,
 				1F7FB1062245C4AD00F8868B /* Particles */,
 				1F16035F2240928500BE48EC /* AppDelegate.swift */,
 				1F1603612240928500BE48EC /* GameScene.sks */,
@@ -88,6 +91,14 @@
 				1F7FB10B2245C50F00F8868B /* Stars.sks */,
 			);
 			path = Particles;
+			sourceTree = "<group>";
+		};
+		1F7FB10F2245EC8900F8868B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1F7FB1102245ECA000F8868B /* Resize+SKSpriteNode.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +178,7 @@
 			files = (
 				1F1603662240928500BE48EC /* GameScene.swift in Sources */,
 				1F7FB10E2245C92B00F8868B /* PlanetCardScene.swift in Sources */,
+				1F7FB1112245ECA000F8868B /* Resize+SKSpriteNode.swift in Sources */,
 				1F1603682240928500BE48EC /* GameViewController.swift in Sources */,
 				1F1603602240928500BE48EC /* AppDelegate.swift in Sources */,
 			);

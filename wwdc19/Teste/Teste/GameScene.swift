@@ -22,35 +22,13 @@ class GameScene: SKScene {
     var fishNode: SKSpriteNode!
     var planetNode: SKSpriteNode!
     
+    // MARK: - Nodes
+    var planetCardScene: PlanetCardScene!
+    
     override func didMove(to view: SKView) {
         let size = CGSize(width: 350, height: 400)
-        if let node = PlanetCardScene.loadBackground(size: size) {
-//            let mask = SKShapeNode(circleOfRadius: 250)
-//            let cropNode = SKCropNode()
-//            cropNode.maskNode = mask
-//            cropNode.addChild(node)
-            self.addChild(node)
-        }
-    }
-    
-    private func animatePlanet() {
-        func animate() {
-            let textures = [
-                SKTexture(imageNamed: "happy-planet-2"),
-                SKTexture(imageNamed: "happy-planet-3"),
-                SKTexture(imageNamed: "happy-planet-4")
-            ]
-            let action = SKAction.animate(with: textures, timePerFrame: 0.3, resize: false, restore: false)
-            planetNode.run(SKAction.wait(forDuration: 3.0)) { [weak self] in
-                self?.planetNode.run(action)
-            }
-        }
-        
-        planetNode = SKSpriteNode(texture: SKTexture(imageNamed: "happy-planet-1"))
-        planetNode.size.width *= 2
-        planetNode.size.height *= 2
-        self.addChild(planetNode)
-        animate()
+        planetCardScene = PlanetCardScene.loadBackground(size: size, addBackgroundIn: self)
+        planetCardScene.animatePlanet(for: .three)
     }
     
     private func atlasAnimation() {
