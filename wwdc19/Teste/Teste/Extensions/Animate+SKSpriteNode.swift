@@ -9,7 +9,7 @@
 import SpriteKit
 
 extension SKSpriteNode {
-    func animate(with textures: [SKTexture], initialTexture: SKTexture?, timePerFrame: TimeInterval, completion: (() -> Void)?) {
+    func animate(with textures: [SKTexture], initialTexture: SKTexture?, timePerFrame: TimeInterval, completion: Completion?) {
         self.texture = initialTexture
         let action = SKAction.animate(with: textures, timePerFrame: timePerFrame, resize: false, restore: false)
         self.run(action, completion: completion ?? {})

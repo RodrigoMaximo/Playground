@@ -41,6 +41,12 @@ extension CustomScene {
         group.notify(queue: DispatchQueue.main, execute: completion ?? {})
     }
     
+    
+    /// Load the backgroundNode of the Scene.
+    /// - Parameters:
+    ///   - scale: This scale is the ratio between the backgroundNode and the scene in which it is been added.
+    ///   - scene: Scene that will add this backgroundNode.
+    /// - Returns: A scene with the backgroundNode and all the other nodes references.
     static func loadBackground(with scale: Scale? = nil, addBackgroundIn scene: SKNode) -> Self? {
         if let customScene = SKScene(fileNamed: String(describing: Self.self)) as? Self,
             let backgroundNode = customScene.backgroundNode

@@ -33,6 +33,8 @@ class GameScene: SKScene {
     
     private func setup() {
         backgroundNode = self.childNode(withName: "backgroundNode") as? SKSpriteNode
+        backgroundNode.size = self.size
+        backgroundNode.setScale(0.3)
         let scale = Scale(x: 1, y: 1)
         planetCardScene = PlanetCardScene.loadBackground(with: scale, addBackgroundIn: backgroundNode)
     }
