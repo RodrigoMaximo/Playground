@@ -11,5 +11,7 @@ import Foundation
 enum Constants {
     enum Planet {
         static let timeInStageAnimation: TimeInterval = 0.5
+        static let timeToCenter: TimeInterval = 1.0
+        static let timeToOrigin: TimeInterval = 1.0
     }
 }

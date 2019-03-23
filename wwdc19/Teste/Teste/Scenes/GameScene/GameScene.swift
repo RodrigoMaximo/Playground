@@ -25,8 +25,11 @@ class GameScene: SKScene {
     
     // MARK: - Nodes
     var planetCardScene: PlanetCardScene!
-    var planetBackgroundNode: SKSpriteNode!
     var scenesBackgroundNode: SKSpriteNode!
+    
+    var planetBackgroundNode: SKSpriteNode!
+    var planetBackgroundPosition: CGPoint!
+    var planetBackgroundScale: Scale!
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let scene = self.scene!
@@ -46,21 +49,29 @@ class GameScene: SKScene {
         setupPlanetCardScene()
     }
     
-    private func touchDown(touchedNode: SKNode) {
-        print(type(of: touchedNode))
-        allPlanetAnimations() { [weak self] in
-            self?.moveQuadrants()
-        }
+    private func setupBackgroundNodes() {
+        setupPlanetBackground()
+        scenesBackgroundNode = self.childNode(withName: "scenesBackgroundNode") as? SKSpriteNode
     }
     
-    private func setupBackgroundNodes() {
+    private func setupPlanetBackground() {
         planetBackgroundNode = self.childNode(withName: "planetBackgroundNode") as? SKSpriteNode
-        scenesBackgroundNode = self.childNode(withName: "scenesBackgroundNode") as? SKSpriteNode
+        planetBackgroundPosition = planetBackgroundNode.position
+        planetBackgroundScale = Scale(x: planetBackgroundNode.xScale, y: planetBackgroundNode.yScale)
     }
     
     private func setupPlanetCardScene() {
         let scale = Scale(x: 1, y: 1)
         planetCardScene = PlanetCardScene.loadBackground(with: scale, addBackgroundIn: planetBackgroundNode)
+    }
+    
+    private func touchDown(touchedNode: SKNode) {
+        print(type(of: touchedNode))
+        animatePlanetToCenter { [weak self] in
+            self?.planetCardScene.animatePlanet(for: .three) {
+                self?.animatePlanetToOrigin(completion: nil)
+            }
+        }
     }
     
     private func allPlanetAnimations(completion: Completion?) {
@@ -85,6 +96,35 @@ class GameScene: SKScene {
         planetCardScene.animateMoveTo(quadrant: .fourth, duration: 3.0) { [weak self] in
             self?.planetCardScene.animateMoveToOrigin(duration: 3.0, completion: nil)
         }
+    }
+    
+    private func animatePlanetToCenter(completion: Completion?) {
+        animatePlanetBackground(
+            duration: Constants.Planet.timeToCenter,
+            scale: Scale(x: 0.7, y: 0.7),
+            position: .zero,
+            completion: completion
+        )
+    }
+    
+    private func animatePlanetToOrigin(completion: Completion?) {
+        animatePlanetBackground(
+            duration: Constants.Planet.timeToOrigin,
+            scale: planetBackgroundScale,
+            position: planetBackgroundPosition,
+            completion: completion
+        )
+    }
+    
+    private func animatePlanetBackground(duration: TimeInterval, scale: Scale, position: CGPoint, completion: Completion?) {
+        let actionMove = SKAction.move(to: position, duration: duration)
+        let actionScaleX = SKAction.scaleX(to: scale.x, duration: duration)
+        let actionScaleY = SKAction.scaleY(to: scale.y, duration: duration)
+        let waitAction = SKAction.wait(forDuration: duration)
+        planetBackgroundNode.run(actionMove)
+        planetBackgroundNode.run(actionScaleX)
+        planetBackgroundNode.run(actionScaleY)
+        planetBackgroundNode.run(waitAction, completion: completion ?? {})
     }
     
     
