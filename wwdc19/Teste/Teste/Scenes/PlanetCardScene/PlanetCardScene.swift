@@ -38,14 +38,30 @@ class PlanetCardScene: SKScene, CustomScene {
     func animatePlanet(for stage: Stage, completion: Completion? = nil) {
         switch stage {
         case .one:
-            animatePlanet(forImageName: "sad-planet", completion: completion)
+            animatePlanetStageOne(completion: completion)
         case .two:
-            animatePlanet(forImageName: "low-sad-planet", completion: completion)
+            animatePlanetStageTwo(completion: completion)
         case .three:
-            animatePlanet(forImageName: "low-happy-planet", completion: completion)
+            animatePlanetStageThree(completion: completion)
         case .four:
-            animatePlanet(forImageName: "happy-planet", completion: completion)
+            animatePlanetStageFour(completion: completion)
         }
+    }
+    
+    private func animatePlanetStageOne(completion: Completion?) {
+        animatePlanet(forImageName: "sad-planet", completion: completion)
+    }
+    
+    private func animatePlanetStageTwo(completion: Completion?) {
+        animatePlanet(forImageName: "low-sad-planet", completion: completion)
+    }
+    
+    private func animatePlanetStageThree(completion: Completion?) {
+        animatePlanet(forImageName: "low-happy-planet", completion: completion)
+    }
+    
+    private func animatePlanetStageFour(completion: Completion?) {
+        animatePlanet(forImageName: "happy-planet", completion: completion)
     }
     
     private func animatePlanet(forImageName imageName: String, completion: Completion?) {

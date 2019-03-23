@@ -29,17 +29,28 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         setup()
+        allPlanetAnimations() { [weak self] in
+            self?.moveQuadrants()
+        }
     }
     
     private func setup() {
+        setupBackgroundNode()
+        setupPlanetCardScene()
+    }
+    
+    private func setupBackgroundNode() {
         backgroundNode = self.childNode(withName: "backgroundNode") as? SKSpriteNode
         backgroundNode.size = self.size
-        backgroundNode.setScale(0.3)
+        backgroundNode.setScale(0.3) // MARK: - Change to 1.0
+    }
+    
+    private func setupPlanetCardScene() {
         let scale = Scale(x: 1, y: 1)
         planetCardScene = PlanetCardScene.loadBackground(with: scale, addBackgroundIn: backgroundNode)
     }
     
-    private func allPlanetAnimations() {
+    private func allPlanetAnimations(completion: Completion?) {
         self.run(SKAction.wait(forDuration: 3)) { [weak self] in
             self?.planetCardScene.animatePlanet(for: .one) {
                 self?.run(SKAction.wait(forDuration: 2)) {
@@ -47,7 +58,9 @@ class GameScene: SKScene {
                         self?.run(SKAction.wait(forDuration: 2)) {
                             self?.planetCardScene.animatePlanet(for: .three) {
                                 self?.run(SKAction.wait(forDuration: 2)) {
-                                    self?.planetCardScene.animatePlanet(for: .four)
+                                    self?.planetCardScene.animatePlanet(for: .four) {
+                                        completion?()
+                                    }
                                 }
                             }
                         }
