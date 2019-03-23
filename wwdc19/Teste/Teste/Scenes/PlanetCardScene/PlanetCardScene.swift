@@ -19,8 +19,6 @@ class PlanetCardScene: SKScene, CustomScene {
         case four
     }
     
-    private let kTimePerFrame: TimeInterval = 0.5
-    
     var backgroundNode: SKSpriteNode!
     var skyNode: SKEmitterNode!
     var planetNode: SKSpriteNode!
@@ -34,9 +32,6 @@ class PlanetCardScene: SKScene, CustomScene {
         backgroundNode = self.childNode(withName: "backgroundNode") as? SKSpriteNode
         skyNode = backgroundNode.childNode(withName: "skyNode") as? SKEmitterNode
         planetNode = backgroundNode.childNode(withName: "planetNode") as? SKSpriteNode
-        skyNode.isPaused = false
-        skyNode.particleZPosition = 5
-        skyNode.targetNode = backgroundNode
     }
     
     func animatePlanet(for stage: Stage, completion: Completion? = nil) {
@@ -75,6 +70,6 @@ class PlanetCardScene: SKScene, CustomScene {
             SKTexture(imageNamed: "\(imageName)-3"),
             SKTexture(imageNamed: "\(imageName)-4")
         ]
-        planetNode.animate(with: textures, initialTexture: initialTexture, timePerFrame: kTimePerFrame, completion: completion)
+        planetNode.animate(with: textures, initialTexture: initialTexture, timePerFrame: Constants.Planet.timeInStageAnimation, completion: completion)
     }
 }

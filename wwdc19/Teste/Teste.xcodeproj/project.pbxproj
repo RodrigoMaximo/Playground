@@ -23,6 +23,7 @@
 		1F7FB11F22461A7900F8868B /* Animate+SKSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FB11E22461A7900F8868B /* Animate+SKSpriteNode.swift */; };
 		1F7FB121224677E400F8868B /* Completion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FB120224677E400F8868B /* Completion.swift */; };
 		1F7FB12322467A8C00F8868B /* Quadrant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FB12222467A8C00F8868B /* Quadrant.swift */; };
+		1FD7F62D2246E8A30013976D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7F62C2246E8A30013976D /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		1F7FB11E22461A7900F8868B /* Animate+SKSpriteNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Animate+SKSpriteNode.swift"; sourceTree = "<group>"; };
 		1F7FB120224677E400F8868B /* Completion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Completion.swift; sourceTree = "<group>"; };
 		1F7FB12222467A8C00F8868B /* Quadrant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quadrant.swift; sourceTree = "<group>"; };
+		1FD7F62C2246E8A30013976D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				1F7FB12222467A8C00F8868B /* Quadrant.swift */,
 				1F7FB1142245F34E00F8868B /* Scale.swift */,
 				1F7FB120224677E400F8868B /* Completion.swift */,
+				1FD7F62C2246E8A30013976D /* Constants.swift */,
 				1F7FB1162245F5CA00F8868B /* CustomScene.swift */,
 			);
 			path = Model;
@@ -220,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F1603662240928500BE48EC /* GameScene.swift in Sources */,
+				1FD7F62D2246E8A30013976D /* Constants.swift in Sources */,
 				1F7FB10E2245C92B00F8868B /* PlanetCardScene.swift in Sources */,
 				1F7FB1112245ECA000F8868B /* Resize+SKSpriteNode.swift in Sources */,
 				1F7FB12322467A8C00F8868B /* Quadrant.swift in Sources */,
