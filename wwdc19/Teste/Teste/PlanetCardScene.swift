@@ -12,7 +12,6 @@ import AVFoundation
 
 class PlanetCardScene: SKScene {
     
-    var shapeNode: SKShapeNode!
     var backgroundNode: SKSpriteNode!
     var skyNode: SKEmitterNode!
     var planetNode: SKSpriteNode!
@@ -30,8 +29,8 @@ class PlanetCardScene: SKScene {
     static func loadBackground(size: CGSize? = nil) -> SKSpriteNode? {
         if let scene = SKScene(fileNamed: "PlanetCardScene") as? PlanetCardScene {
             let backgroundNode = scene.backgroundNode
-            backgroundNode?.resize(with: size)
             backgroundNode?.removeFromParent()
+            backgroundNode?.resize(with: size)
             return backgroundNode
         }
         return nil

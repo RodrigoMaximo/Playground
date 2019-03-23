@@ -25,6 +25,10 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         let size = CGSize(width: 350, height: 400)
         if let node = PlanetCardScene.loadBackground(size: size) {
+//            let mask = SKShapeNode(circleOfRadius: 250)
+//            let cropNode = SKCropNode()
+//            cropNode.maskNode = mask
+//            cropNode.addChild(node)
             self.addChild(node)
         }
     }
