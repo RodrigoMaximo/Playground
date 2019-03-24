@@ -28,6 +28,8 @@
 		1FD7F632224734D00013976D /* AirScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FD7F631224734D00013976D /* AirScene.sks */; };
 		1FD7F635224791B30013976D /* WaterScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FD7F634224791B30013976D /* WaterScene.sks */; };
 		1FD7F637224796290013976D /* WaterScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7F636224796290013976D /* WaterScene.swift */; };
+		1FD7F63A22481FDA0013976D /* Deforestation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7F63922481FDA0013976D /* Deforestation.swift */; };
+		1FD7F63C224820180013976D /* DeforestationScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FD7F63B224820180013976D /* DeforestationScene.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +56,8 @@
 		1FD7F631224734D00013976D /* AirScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AirScene.sks; sourceTree = "<group>"; };
 		1FD7F634224791B30013976D /* WaterScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WaterScene.sks; sourceTree = "<group>"; };
 		1FD7F636224796290013976D /* WaterScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterScene.swift; sourceTree = "<group>"; };
+		1FD7F63922481FDA0013976D /* Deforestation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deforestation.swift; sourceTree = "<group>"; };
+		1FD7F63B224820180013976D /* DeforestationScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DeforestationScene.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +136,7 @@
 		1F7FB11B2245F61F00F8868B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				1FD7F63822481F8A0013976D /* DeforestationScene */,
 				1FD7F633224791A00013976D /* WaterScene */,
 				1FD7F62E224734710013976D /* AirScene */,
 				1F7FB11D2245F63800F8868B /* PlanetCardScene */,
@@ -174,6 +179,15 @@
 				1FD7F636224796290013976D /* WaterScene.swift */,
 			);
 			path = WaterScene;
+			sourceTree = "<group>";
+		};
+		1FD7F63822481F8A0013976D /* DeforestationScene */ = {
+			isa = PBXGroup;
+			children = (
+				1FD7F63922481FDA0013976D /* Deforestation.swift */,
+				1FD7F63B224820180013976D /* DeforestationScene.sks */,
+			);
+			path = DeforestationScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F7FB10C2245C50F00F8868B /* Stars.sks in Resources */,
+				1FD7F63C224820180013976D /* DeforestationScene.sks in Resources */,
 				1F16036B2240928500BE48EC /* Main.storyboard in Resources */,
 				1FD7F632224734D00013976D /* AirScene.sks in Resources */,
 				1F1603622240928500BE48EC /* GameScene.sks in Resources */,
@@ -257,6 +272,7 @@
 				1F7FB10E2245C92B00F8868B /* PlanetCardScene.swift in Sources */,
 				1FD7F630224734840013976D /* AirScene.swift in Sources */,
 				1F7FB1112245ECA000F8868B /* Resize+SKSpriteNode.swift in Sources */,
+				1FD7F63A22481FDA0013976D /* Deforestation.swift in Sources */,
 				1F7FB12322467A8C00F8868B /* Quadrant.swift in Sources */,
 				1F1603682240928500BE48EC /* GameViewController.swift in Sources */,
 				1F7FB1172245F5CA00F8868B /* CustomScene.swift in Sources */,
