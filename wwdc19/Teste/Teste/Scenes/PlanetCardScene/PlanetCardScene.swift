@@ -23,12 +23,7 @@ class PlanetCardScene: SKScene, CustomScene {
     var skyNode: SKEmitterNode!
     var planetNode: SKSpriteNode!
     
-    override func sceneDidLoad() {
-        super.sceneDidLoad()
-        loadCard()
-    }
-    
-    private func loadCard() {
+    func load() {
         backgroundNode = self.childNode(withName: "backgroundNode") as? SKSpriteNode
         skyNode = backgroundNode.childNode(withName: "skyNode") as? SKEmitterNode
         planetNode = backgroundNode.childNode(withName: "planetNode") as? SKSpriteNode

@@ -25,6 +25,8 @@ class GameScene: SKScene {
     
     // MARK: - Nodes
     var planetCardScene: PlanetCardScene!
+    var airScene: AirScene!
+    
     var scenesBackgroundNode: SKSpriteNode!
     
     var planetBackgroundNode: SKSpriteNode!
@@ -46,7 +48,7 @@ class GameScene: SKScene {
     
     private func setup() {
         setupBackgroundNodes()
-        setupPlanetCardScene()
+        setupScenes()
     }
     
     private func setupBackgroundNodes() {
@@ -60,19 +62,29 @@ class GameScene: SKScene {
         planetBackgroundScale = Scale(x: planetBackgroundNode.xScale, y: planetBackgroundNode.yScale)
     }
     
+    private func setupScenes() {
+        setupPlanetCardScene()
+        setupAirScene()
+    }
+    
     private func setupPlanetCardScene() {
         let scale = Scale(x: 1, y: 1)
         planetCardScene = PlanetCardScene.loadBackground(with: scale, addBackgroundIn: planetBackgroundNode)
     }
     
+    private func setupAirScene() {
+        let scale = Scale(x: 1, y: 1)
+        airScene = AirScene.loadBackground(with: scale, addBackgroundIn: scenesBackgroundNode)
+    }
+    
     private func touchDown(touchedNode: SKNode) {
         print(type(of: touchedNode))
-//        animatePlanetToCenter { [weak self] in
-//            self?.planetCardScene.animatePlanet(for: .three) {
-//                self?.animatePlanetToOrigin(completion: nil)
-//            }
-//        }
-        moveQuadrants()
+        animatePlanetToCenter { [weak self] in
+            self?.planetCardScene.animatePlanet(for: .three) {
+                self?.animatePlanetToOrigin(completion: nil)
+            }
+        }
+        moveQuadrants(completion: {})
     }
     
     private func allPlanetAnimations(completion: Completion?) {
@@ -93,11 +105,15 @@ class GameScene: SKScene {
         }
     }
     
-    private func moveQuadrants() {
-        planetCardScene.animateMoveTo(quadrant: .fourth, duration: 3.0) { [weak self] in
-            self?.planetCardScene.animateMoveToOrigin(duration: 3.0) {
-                self?.planetCardScene.animateMoveTo(quadrant: .fourth, duration: 3.0, completion: nil)
-            }
+    private func moveQuadrants(completion: @escaping Completion) {
+//        planetCardScene.animateMoveTo(quadrant: .fourth, duration: 3.0) { [weak self] in
+//            self?.planetCardScene.animateMoveToOrigin(duration: 3.0) {
+//                self?.planetCardScene.animateMoveTo(quadrant: .fourth, duration: 3.0, completion: nil)
+//            }
+//        }
+        
+        airScene.animateMoveTo(quadrant: .fourth, duration: 3.0) { [weak self] in
+            self?.airScene.animateMoveToOrigin(duration: 3.0, completion: completion)
         }
     }
     

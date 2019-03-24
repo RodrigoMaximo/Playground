@@ -11,6 +11,7 @@ import SpriteKit
 
 protocol CustomScene where Self: SKScene {
     var backgroundNode: SKSpriteNode! { get set }
+    func load()
 }
 
 extension CustomScene {
@@ -29,16 +30,9 @@ extension CustomScene {
     
     fileprivate func animateMoveTo(point: CGPoint, finalScale: CGFloat, duration: TimeInterval, completion: Completion?) {
         guard let backgroundNode = backgroundNode else { return }
-        let group = DispatchGroup()
-        group.enter()
-        backgroundNode.run(.move(to: point, duration: duration)) {
-            group.leave()
-        }
-        group.enter()
-        backgroundNode.run(.scale(to: finalScale, duration: duration)) {
-            group.leave()
-        }
-        group.notify(queue: DispatchQueue.main, execute: completion ?? {})
+        backgroundNode.run(.move(to: point, duration: duration))
+        backgroundNode.run(.scale(to: finalScale, duration: duration))
+        backgroundNode.run(.wait(forDuration: duration), completion: completion ?? {})
     }
     
     
@@ -48,15 +42,13 @@ extension CustomScene {
     ///   - scene: Scene that will add this backgroundNode.
     /// - Returns: A scene with the backgroundNode and all the other nodes references.
     static func loadBackground(with scale: Scale? = nil, addBackgroundIn scene: SKNode) -> Self? {
-        if let customScene = Self(fileNamed: String(describing: Self.self)),
-            let backgroundNode = customScene.backgroundNode
-        {
-            backgroundNode.removeFromParent()
-            backgroundNode.resize(with: scale)
-            scene.addChild(backgroundNode)
-            return customScene
-        }
-        return nil
+        guard let customScene = Self(fileNamed: String(describing: Self.self)) else { return nil }
+        customScene.load()
+        guard let backgroundNode = customScene.backgroundNode else { return nil }
+        backgroundNode.removeFromParent()
+        backgroundNode.resize(with: scale)
+        scene.addChild(backgroundNode)
+        return customScene
     }
     
     static func loadBackground(with size: CGSize? = nil, addBackgroundIn scene: SKNode) -> Self? {
