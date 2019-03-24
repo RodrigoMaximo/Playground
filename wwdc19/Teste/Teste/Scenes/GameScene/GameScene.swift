@@ -145,7 +145,7 @@ class GameScene: SKScene {
         default:
             break
         }
-        if let scene = customScene {
+        if let scene = customScene, customScene?.selectionNode.isPaused == false {
             scene.animateMoveToOrigin(duration: Constants.timeBetweenAnimations) {
                 self.isProcessingTouch = false
             }
@@ -161,7 +161,7 @@ class GameScene: SKScene {
                     self?.planetCardScene.animatePlanetToNextStage() {
                         self?.animatePlanetToOrigin() {
                             self?.airScene.animateMoveTo(quadrant: .first, duration: Constants.timeBetweenAnimations) {
-                                self?.airScene.backgroundNode.isPaused = true
+                                self?.airScene.selectionNode.isPaused = true
                                 // TODO: - visual for completion task
                                 completion?()
                             }
@@ -181,8 +181,7 @@ class GameScene: SKScene {
                     self?.planetCardScene.animatePlanetToNextStage() {
                         self?.animatePlanetToOrigin() {
                             self?.waterScene.animateMoveTo(quadrant: .second, duration: Constants.timeBetweenAnimations) {
-                                self?.waterScene.backgroundNode.isPaused = true
-                                // TODO: - visual for completion task
+                                self?.waterScene.selectionNode.isPaused = true
                                 completion?()
                             }
                         }

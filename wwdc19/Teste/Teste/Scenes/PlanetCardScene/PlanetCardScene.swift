@@ -77,6 +77,8 @@ class PlanetCardScene: SKScene, CustomScene {
             SKTexture(imageNamed: "\(imageName)-3"),
             SKTexture(imageNamed: "\(imageName)-4")
         ]
-        planetNode.animate(with: textures, initialTexture: initialTexture, timePerFrame: Constants.Planet.timeInStageAnimation, completion: completion)
+        planetNode.run(.wait(forDuration: Constants.timeBetweenAnimations)) { [weak self] in
+            self?.planetNode.animate(with: textures, initialTexture: initialTexture, timePerFrame: Constants.Planet.timeInStageAnimation, completion: completion)
+        }
     }
 }

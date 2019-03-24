@@ -23,9 +23,13 @@ class WaterScene: SKScene, CustomScene {
     var canNode2: SKSpriteNode!
     var bottleNode: SKSpriteNode!
     var oilNode: SKSpriteNode!
+    var deadFishNode1: SKSpriteNode!
+    var deadFishNode2: SKSpriteNode!
+    var deadFishNode3: SKSpriteNode!
     var fishNode1: SKSpriteNode!
     var fishNode2: SKSpriteNode!
     var fishNode3: SKSpriteNode!
+    var fishNode4: SKSpriteNode!
     var trashNodes: [SKSpriteNode]!
     
     var objectsTouched: Int = 0
@@ -49,9 +53,13 @@ class WaterScene: SKScene, CustomScene {
         canNode2 = backgroundCrop.childNode(withName: "canNode2") as? SKSpriteNode
         bottleNode = backgroundCrop.childNode(withName: "bottleNode") as? SKSpriteNode
         oilNode = backgroundCrop.childNode(withName: "oilNode") as? SKSpriteNode
+        deadFishNode1 = backgroundCrop.childNode(withName: "deadFishNode1") as? SKSpriteNode
+        deadFishNode2 = backgroundCrop.childNode(withName: "deadFishNode2") as? SKSpriteNode
+        deadFishNode3 = backgroundCrop.childNode(withName: "deadFishNode3") as? SKSpriteNode
         fishNode1 = backgroundCrop.childNode(withName: "fishNode1") as? SKSpriteNode
         fishNode2 = backgroundCrop.childNode(withName: "fishNode2") as? SKSpriteNode
         fishNode3 = backgroundCrop.childNode(withName: "fishNode3") as? SKSpriteNode
+        fishNode4 = backgroundCrop.childNode(withName: "fishNode4") as? SKSpriteNode
         backgroundNode.isPaused = false
         trashNodes = [wasteNode1, wasteNode2, canNode1, canNode2, oilNode, bottleNode]
         cropBackground()
@@ -60,6 +68,7 @@ class WaterScene: SKScene, CustomScene {
     func triggerInitialActions() {
         animateWater()
         animateTrash()
+        animateLiveFish()
     }
     
     private func animateWater() {
@@ -82,9 +91,9 @@ class WaterScene: SKScene, CustomScene {
         canNode1.run(.repeatForever(action))
         canNode2.run(.repeatForever(action))
         bottleNode.run(.repeatForever(action))
-        fishNode1.run(.repeatForever(action))
-        fishNode2.run(.repeatForever(action))
-        fishNode3.run(.repeatForever(action))
+        deadFishNode1.run(.repeatForever(action))
+        deadFishNode2.run(.repeatForever(action))
+        deadFishNode3.run(.repeatForever(action))
     }
     
     private func sequenceAction(distanceX: CGFloat, distanceY: CGFloat, duration: TimeInterval) -> SKAction {
@@ -93,6 +102,28 @@ class WaterScene: SKScene, CustomScene {
         let waterAction3 = SKAction.moveBy(x: distanceX, y: distanceY, duration: duration)
         let waterAction4 = SKAction.moveBy(x: -distanceX, y: -distanceY, duration: duration)
         return SKAction.sequence([waterAction1, waterAction2, waterAction3, waterAction4])
+    }
+    
+    private func animateLiveFish() {
+        func actionFish(duration: TimeInterval, distanceX: CGFloat, distanceY: CGFloat) -> SKAction {
+            let actionToRight = SKAction.moveBy(x: distanceX, y: distanceY, duration: duration)
+            let actionToLeft = SKAction.moveBy(x: -distanceX, y: -distanceY, duration: duration)
+            let actionTurnSide = SKAction.scaleX(to: -1, duration: duration/5)
+            let actionTurnSideAgain = SKAction.scaleX(to: 1, duration: duration/5)
+            return SKAction.sequence([actionToRight, actionTurnSide, actionToLeft, actionTurnSideAgain])
+        }
+        let duration1 = Constants.Water.timeToTravelFish1
+        let distance1 = Constants.Water.distanceToTravelFish1
+        let duration2 = Constants.Water.timeToTravelFish2
+        let distance2 = Constants.Water.distanceToTravelFish2
+        let duration3 = Constants.Water.timeToTravelFish3
+        let distance3 = Constants.Water.distanceToTravelFish3
+        let duration4 = Constants.Water.timeToTravelFish4
+        let distance4 = Constants.Water.distanceToTravelFish4
+        fishNode1.run(.repeatForever(actionFish(duration: duration1, distanceX: distance1, distanceY: 0)))
+        fishNode2.run(.repeatForever(actionFish(duration: duration2, distanceX: distance2, distanceY: 0)))
+        fishNode3.run(.repeatForever(actionFish(duration: duration3, distanceX: distance3, distanceY: 0)))
+        fishNode4.run(.repeatForever(actionFish(duration: duration4, distanceX: distance4, distanceY: 0)))
     }
     
     func touchTrash(node: SKNode, completion: ((Bool) -> Void)? = nil) {
@@ -128,19 +159,32 @@ class WaterScene: SKScene, CustomScene {
         oceanNode2.run(actions[1])
         oceanNode3.run(actions[2])
         oceanNode4.run(actions[3])
-        backgroundNode.run(.wait(forDuration: Constants.Water.timeToChangeWater * 7), completion: completion ?? {})
+        backgroundNode.run(.wait(forDuration: Constants.Water.timeToChangeWater * 7)) { [weak self] in
+            self?.animateDeadFish()
+            self?.showLiveFish(completion: completion)
+        }
     }
     
     private func animateDeadFish(completion: Completion? = nil) {
         let duration = Constants.timeBetweenAnimations
         let fadeOutAction = SKAction.fadeOut(withDuration: duration)
-        fishNode1.run(fadeOutAction)
-        fishNode2.run(fadeOutAction)
-        fishNode3.run(fadeOutAction)
-        backgroundNode.run(.wait(forDuration: duration), completion: completion ?? {})
+        deadFishNode1.run(fadeOutAction)
+        deadFishNode2.run(fadeOutAction)
+        deadFishNode3.run(fadeOutAction)
+        backgroundNode.run(.wait(forDuration: duration)) {
+            completion?()
+        }
     }
     
     private func showLiveFish(completion: Completion? = nil) {
-        
+        let duration = Constants.timeBetweenAnimations
+        let fadeInAction = SKAction.fadeIn(withDuration: duration)
+        fishNode1.run(fadeInAction)
+        fishNode2.run(fadeInAction)
+        fishNode3.run(fadeInAction)
+        fishNode4.run(fadeInAction)
+        backgroundNode.run(.wait(forDuration: duration)) {
+            completion?()
+        }
     }
 }
