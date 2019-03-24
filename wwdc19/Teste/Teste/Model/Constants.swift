@@ -53,5 +53,7 @@ enum Constants {
         static let timeToCloud3: TimeInterval = 190.0
         static let chainSawMovement: CGFloat = 6.0
         static let timeToChain: TimeInterval = 0.1
+        static let timeToHide: TimeInterval = 1.0
+        static let timeToShowTree: TimeInterval = 0.5
     }
 }

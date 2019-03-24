@@ -87,4 +87,40 @@ class DeforestationScene: SKScene, CustomScene {
         ]
         chainSawNode.run(SKAction.repeatForever(SKAction.sequence(actions)))
     }
+    
+    func touchTargets(node: SKNode, completion: ((Bool) -> Void)? = nil) {
+        guard let node = node as? SKSpriteNode, targetNodes.contains(node) else {
+            completion?(false)
+            return
+        }
+        let hideAction = SKAction.fadeOut(withDuration: Constants.Deforestation.timeToHide)
+        node.run(hideAction) { [weak self] in
+            self?.objectsTouched += 1
+            node.removeFromParent()
+            completion?(true)
+        }
+    }
+    
+    func animatePlantTrees(completion: Completion? = nil) {
+        let duration = Constants.Deforestation.timeToShowTree
+        let action1 = SKAction.fadeIn(withDuration: duration)
+        let action2 = SKAction.fadeIn(withDuration: duration)
+        let action3 = SKAction.fadeIn(withDuration: duration)
+        let action4 = SKAction.fadeIn(withDuration: duration)
+        let action5 = SKAction.fadeIn(withDuration: duration)
+        let action6 = SKAction.fadeIn(withDuration: duration)
+        treeNode1.run(action1) { [weak self] in
+            self?.treeNode2.run(action2) {
+                self?.treeNode3.run(action3) {
+                    self?.treeNode4.run(action4) {
+                        self?.treeNode5.run(action5) {
+                            self?.treeNode6.run(action6) {
+                                completion?()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

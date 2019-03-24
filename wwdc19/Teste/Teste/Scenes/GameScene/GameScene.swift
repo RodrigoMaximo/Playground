@@ -117,6 +117,17 @@ class GameScene: SKScene {
         }
         
         group.enter()
+        deforestationScene.touchTargets(node: touchedNode) { [weak self] found in
+            if found {
+                self?.deforestationNextLevel() {
+                    group.leave()
+                }
+            } else {
+                group.leave()
+            }
+        }
+        
+        group.enter()
         waterScene.touchTrash(node: touchedNode) { [weak self] found in
             if found {
                 self?.waterSceneNextLevel() {
@@ -165,41 +176,60 @@ class GameScene: SKScene {
     }
     
     private func airSceneNextLevel(completion: Completion? = nil) {
-        if airScene.isNextLevel {
-            airScene.animateCleanSky { [weak self] in
-                self?.animatePlanetToCenter {
-                    self?.planetCardScene.animatePlanetToNextStage() {
-                        self?.animatePlanetToOrigin() {
-                            self?.airScene.animateMoveTo(quadrant: .first, duration: Constants.timeBetweenAnimations) {
-                                self?.airScene.selectionNode.isPaused = true
-                                // TODO: - visual for completion task
-                                completion?()
-                            }
+        guard deforestationScene.isNextLevel else {
+            completion?()
+            return
+        }
+        airScene.animateCleanSky { [weak self] in
+            self?.animatePlanetToCenter {
+                self?.planetCardScene.animatePlanetToNextStage() {
+                    self?.animatePlanetToOrigin() {
+                        self?.airScene.animateMoveTo(quadrant: .first, duration: Constants.timeBetweenAnimations) {
+                            self?.airScene.selectionNode.isPaused = true
+                            // TODO: - visual for completion task
+                            completion?()
                         }
                     }
                 }
             }
-        } else {
-            completion?()
         }
     }
     
     private func waterSceneNextLevel(completion: Completion? = nil) {
-        if waterScene.isNextLevel {
-            self.waterScene.animateOceanCleaning { [weak self] in
-                self?.animatePlanetToCenter {
-                    self?.planetCardScene.animatePlanetToNextStage() {
-                        self?.animatePlanetToOrigin() {
-                            self?.waterScene.animateMoveTo(quadrant: .third, duration: Constants.timeBetweenAnimations) {
-                                self?.waterScene.selectionNode.isPaused = true
-                                completion?()
-                            }
+        guard deforestationScene.isNextLevel else {
+            completion?()
+            return
+        }
+        self.waterScene.animateOceanCleaning { [weak self] in
+            self?.animatePlanetToCenter {
+                self?.planetCardScene.animatePlanetToNextStage() {
+                    self?.animatePlanetToOrigin() {
+                        self?.waterScene.animateMoveTo(quadrant: .third, duration: Constants.timeBetweenAnimations) {
+                            self?.waterScene.selectionNode.isPaused = true
+                            completion?()
                         }
                     }
                 }
             }
-        } else {
+        }
+    }
+    
+    private func deforestationNextLevel(completion: Completion? = nil) {
+        guard deforestationScene.isNextLevel else {
             completion?()
+            return
+        }
+        deforestationScene.animatePlantTrees() { [weak self] in
+            self?.animatePlanetToCenter {
+                self?.planetCardScene.animatePlanetToNextStage() {
+                    self?.animatePlanetToOrigin() {
+                        self?.deforestationScene.animateMoveTo(quadrant: .second, duration: Constants.timeBetweenAnimations) {
+                            self?.deforestationScene.selectionNode.isPaused = true
+                            completion?()
+                        }
+                    }
+                }
+            }
         }
     }
     
