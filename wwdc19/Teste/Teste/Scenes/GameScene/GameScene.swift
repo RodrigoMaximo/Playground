@@ -23,15 +23,19 @@ class GameScene: SKScene {
     var fishNode: SKSpriteNode!
     var planetNode: SKSpriteNode!
     
-    // MARK: - Nodes
+    // MARK: - Scenes
     var planetCardScene: PlanetCardScene!
     var airScene: AirScene!
     
+    // MARK: - Backgrounds
     var scenesBackgroundNode: SKSpriteNode!
-    
     var planetBackgroundNode: SKSpriteNode!
+    
+    // MARK: - Planet information
     var planetBackgroundPosition: CGPoint!
     var planetBackgroundScale: Scale!
+    
+    var isProcessingTouch = false
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let scene = self.scene!
@@ -78,43 +82,43 @@ class GameScene: SKScene {
     }
     
     private func touchDown(touchedNode: SKNode) {
+        guard isProcessingTouch == false else { return }
+        isProcessingTouch = true
         print(type(of: touchedNode))
+        let group = DispatchGroup()
+        group.enter()
         airScene.carNodeTouched(touchedNode) { [weak self] in
-            self?.airSceneNextLevel()
+            self?.airSceneNextLevel() {
+                group.leave()
+            }
         }
         switch touchedNode {
         case airScene.factoryNode:
+            group.enter()
             airScene.touchFactory() { [weak self] in
-                self?.airSceneNextLevel()
+                self?.airSceneNextLevel() {
+                    group.leave()
+                }
             }
         default:
-            return
+            break
+        }
+        group.notify(queue: .main) {
+            self.isProcessingTouch = false
         }
     }
     
-    private func airSceneNextLevel() {
+    private func airSceneNextLevel(completion: Completion? = nil) {
         if airScene.isNextLevel {
-            airScene.animateCleanSky() {
-                print("Next level")
-            }
-        }
-    }
-    
-    private func allPlanetAnimations(completion: Completion?) {
-        self.planetCardScene.animatePlanet(for: .one) { [weak self] in
-            self?.run(SKAction.wait(forDuration: 2)) {
-                self?.planetCardScene.animatePlanet(for: .two) {
-                    self?.run(SKAction.wait(forDuration: 2)) {
-                        self?.planetCardScene.animatePlanet(for: .three) {
-                            self?.run(SKAction.wait(forDuration: 2)) {
-                                self?.planetCardScene.animatePlanet(for: .four) {
-                                    completion?()
-                                }
-                            }
-                        }
+            airScene.animateCleanSky { [weak self] in
+                self?.animatePlanetToCenter {
+                    self?.planetCardScene.animatePlanetToNextStage() {
+                        self?.animatePlanetToOrigin(completion: completion)
                     }
                 }
             }
+        } else {
+            completion?()
         }
     }
     
@@ -130,22 +134,26 @@ class GameScene: SKScene {
         }
     }
     
-    private func animatePlanetToCenter(completion: Completion?) {
-        animatePlanetBackground(
-            duration: Constants.Planet.timeToCenter,
-            scale: Scale(x: 0.7, y: 0.7),
-            position: .zero,
-            completion: completion
-        )
+    private func animatePlanetToCenter(completion: Completion? = nil) {
+        self.run(.wait(forDuration: Constants.timeBetweenAnimations)) { [weak self] in
+            self?.animatePlanetBackground(
+                duration: Constants.Planet.timeToCenter,
+                scale: Scale(x: 0.7, y: 0.7),
+                position: .zero,
+                completion: completion
+            )
+        }
     }
     
-    private func animatePlanetToOrigin(completion: Completion?) {
-        animatePlanetBackground(
-            duration: Constants.Planet.timeToOrigin,
-            scale: planetBackgroundScale,
-            position: planetBackgroundPosition,
-            completion: completion
-        )
+    private func animatePlanetToOrigin(completion: Completion? = nil) {
+        self.run(.wait(forDuration: Constants.timeBetweenAnimations)) { [unowned self] in
+            self.animatePlanetBackground(
+                duration: Constants.Planet.timeToOrigin,
+                scale: self.planetBackgroundScale,
+                position: self.planetBackgroundPosition,
+                completion: completion
+            )
+        }
     }
     
     private func animatePlanetBackground(duration: TimeInterval, scale: Scale, position: CGPoint, completion: Completion?) {

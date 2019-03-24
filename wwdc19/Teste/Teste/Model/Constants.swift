@@ -9,10 +9,11 @@
 import Foundation
 
 enum Constants {
+    static let timeBetweenAnimations: TimeInterval = 1.0
     enum Planet {
-        static let timeInStageAnimation: TimeInterval = 0.5
-        static let timeToCenter: TimeInterval = 1.0
-        static let timeToOrigin: TimeInterval = 1.0
+        static let timeInStageAnimation: TimeInterval = 1.0
+        static let timeToCenter: TimeInterval = 1.5
+        static let timeToOrigin: TimeInterval = 1.5
     }
     enum Air {
         static let timeToSmoke: TimeInterval = 1.0

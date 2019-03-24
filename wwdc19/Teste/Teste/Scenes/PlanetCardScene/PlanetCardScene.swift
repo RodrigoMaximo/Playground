@@ -12,7 +12,8 @@ import AVFoundation
 
 class PlanetCardScene: SKScene, CustomScene {
     
-    enum Stage {
+    enum Stage: Int {
+        case zero = 0
         case one
         case two
         case three
@@ -22,6 +23,7 @@ class PlanetCardScene: SKScene, CustomScene {
     var backgroundNode: SKSpriteNode!
     var skyNode: SKEmitterNode!
     var planetNode: SKSpriteNode!
+    var currentStage: Stage = .zero
     
     func load() {
         backgroundNode = self.childNode(withName: "backgroundNode") as? SKSpriteNode
@@ -31,16 +33,21 @@ class PlanetCardScene: SKScene, CustomScene {
     
     func triggerInitialActions() {}
     
-    func animatePlanet(for stage: Stage, completion: Completion? = nil) {
-        switch stage {
-        case .one:
-            animatePlanetStageOne(completion: completion)
-        case .two:
-            animatePlanetStageTwo(completion: completion)
-        case .three:
-            animatePlanetStageThree(completion: completion)
-        case .four:
-            animatePlanetStageFour(completion: completion)
+    func animatePlanetToNextStage(completion: Completion? = nil) {
+        backgroundNode.run(.wait(forDuration: Constants.timeBetweenAnimations)) { [unowned self] in
+            switch self.currentStage {
+            case .zero:
+                self.animatePlanetStageOne(completion: completion)
+            case .one:
+                self.animatePlanetStageTwo(completion: completion)
+            case .two:
+                self.animatePlanetStageThree(completion: completion)
+            case .three:
+                self.animatePlanetStageFour(completion: completion)
+            case .four:
+                return
+            }
+            self.currentStage = Stage(rawValue: self.currentStage.rawValue + 1) ?? .four
         }
     }
     
