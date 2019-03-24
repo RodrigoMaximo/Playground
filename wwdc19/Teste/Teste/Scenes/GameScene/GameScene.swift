@@ -79,11 +79,6 @@ class GameScene: SKScene {
     
     private func touchDown(touchedNode: SKNode) {
         print(type(of: touchedNode))
-        animatePlanetToCenter { [weak self] in
-            self?.planetCardScene.animatePlanet(for: .three) {
-                self?.animatePlanetToOrigin(completion: nil)
-            }
-        }
         moveQuadrants(completion: {})
     }
     
@@ -106,11 +101,11 @@ class GameScene: SKScene {
     }
     
     private func moveQuadrants(completion: @escaping Completion) {
-//        planetCardScene.animateMoveTo(quadrant: .fourth, duration: 3.0) { [weak self] in
-//            self?.planetCardScene.animateMoveToOrigin(duration: 3.0) {
-//                self?.planetCardScene.animateMoveTo(quadrant: .fourth, duration: 3.0, completion: nil)
-//            }
-//        }
+        planetCardScene.animateMoveTo(quadrant: .fourth, duration: 3.0) { [weak self] in
+            self?.planetCardScene.animateMoveToOrigin(duration: 3.0) {
+                self?.planetCardScene.animateMoveTo(quadrant: .fourth, duration: 3.0, completion: nil)
+            }
+        }
         
         airScene.animateMoveTo(quadrant: .fourth, duration: 3.0) { [weak self] in
             self?.airScene.animateMoveToOrigin(duration: 3.0, completion: completion)
