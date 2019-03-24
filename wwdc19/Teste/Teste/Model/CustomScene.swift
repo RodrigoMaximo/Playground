@@ -24,7 +24,7 @@ extension CustomScene {
         selectionNode.size = self.size
         selectionNode.zPosition = 50
         backgroundNode.addChild(selectionNode)
-        let finalScale = Quadrant.scale
+        let finalScale = quadrant.scale
         let finalPoint = quadrant.coordinates(size: backgroundNode.size)
         animateMoveTo(point: finalPoint, finalScale: finalScale, duration: duration) { [weak self] in
             self?.backgroundNode.zPosition = 3
@@ -35,15 +35,16 @@ extension CustomScene {
     func animateMoveToOrigin(duration: TimeInterval, completion: Completion?) {
         selectionNode.removeFromParent()
         backgroundNode.zPosition = 100
-        let finalScale: CGFloat = 1.0
+        let finalScale: Scale = Scale(x: 1.0, y: 1.0)
         let origin = CGPoint(x: 0, y: 0)
         animateMoveTo(point: origin, finalScale: finalScale, duration: duration, completion: completion)
     }
     
-    fileprivate func animateMoveTo(point: CGPoint, finalScale: CGFloat, duration: TimeInterval, completion: Completion?) {
+    fileprivate func animateMoveTo(point: CGPoint, finalScale: Scale, duration: TimeInterval, completion: Completion?) {
         guard let backgroundNode = backgroundNode else { return }
         backgroundNode.run(.move(to: point, duration: duration))
-        backgroundNode.run(.scale(to: finalScale, duration: duration))
+        backgroundNode.run(.scaleX(to: finalScale.x, duration: duration))
+        backgroundNode.run(.scaleY(to: finalScale.y, duration: duration))
         backgroundNode.run(.wait(forDuration: duration), completion: completion ?? {})
     }
     

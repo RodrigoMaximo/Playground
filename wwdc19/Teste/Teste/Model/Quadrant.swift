@@ -27,15 +27,25 @@ enum Quadrant: CaseIterable {
         case .second:
             (x, y) = (-x, y)
         case .third:
-            (x, y) = (-x, -y)
+            (x, y) = (0, -y)
         case .fourth:
-            (x, y) = (x, -y)
+            (x, y) = (0, -y)
         }
         return CGPoint(x: x, y: y)
     }
     
-    static var scale: CGFloat {
-        let marginPercentage: CGFloat = hasMargin ? percentage : 0.0
-        return (1.0 - marginPercentage) / (CGFloat(self.allCases.count) / 2.0)
+    var scale: Scale {
+        switch self {
+        case .first, .second:
+            let marginPercentage: CGFloat = Quadrant.hasMargin ? Quadrant.percentage : 0.0
+            let scale = (1.0 - marginPercentage) / (CGFloat(Quadrant.allCases.count) / 2.0)
+            return Scale(x: scale, y: scale)
+        case .third, .fourth:
+            let marginPercentage: CGFloat = Quadrant.hasMargin ? Quadrant.percentage : 0.0
+            let yScale = (1.0 - marginPercentage) / (CGFloat(Quadrant.allCases.count) / 2.0)
+            let xScale = (1.0 - marginPercentage*2/3)
+            return Scale(x: xScale, y: yScale)
+        }
     }
+
 }

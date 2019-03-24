@@ -27,6 +27,7 @@ class GameScene: SKScene {
     var planetCardScene: PlanetCardScene!
     var airScene: AirScene!
     var waterScene: WaterScene!
+    var waterScene2: WaterScene!
     
     // MARK: - Backgrounds
     var scenesBackgroundNode: SKSpriteNode!
@@ -56,6 +57,7 @@ class GameScene: SKScene {
         setupScenes()
         airScene.animateMoveTo(quadrant: .first, duration: 0.0, completion: nil)
         waterScene.animateMoveTo(quadrant: .second, duration: 0.0, completion: nil)
+        waterScene2.animateMoveTo(quadrant: .third, duration: 0.0, completion: nil)
     }
     
     private func setupBackgroundNodes() {
@@ -88,6 +90,7 @@ class GameScene: SKScene {
     private func setupWaterScene() {
         let scale = Scale(x: 1, y: 1)
         waterScene = WaterScene.loadBackground(with: scale, forParentNode: scenesBackgroundNode)
+        waterScene2 = WaterScene.loadBackground(with: scale, forParentNode: scenesBackgroundNode)
     }
     
     private func touchDown(touchedNode: SKNode) {
@@ -190,18 +193,6 @@ class GameScene: SKScene {
             }
         } else {
             completion?()
-        }
-    }
-    
-    private func moveQuadrants(completion: @escaping Completion) {
-        planetCardScene.animateMoveTo(quadrant: .fourth, duration: 3.0) { [weak self] in
-            self?.planetCardScene.animateMoveToOrigin(duration: 3.0) {
-                self?.planetCardScene.animateMoveTo(quadrant: .fourth, duration: 3.0, completion: nil)
-            }
-        }
-        
-        airScene.animateMoveTo(quadrant: .fourth, duration: 3.0) { [weak self] in
-            self?.airScene.animateMoveToOrigin(duration: 3.0, completion: completion)
         }
     }
     
