@@ -185,7 +185,7 @@ class GameScene: SKScene {
     }
     
     private func airSceneNextLevel(completion: Completion? = nil) {
-        guard deforestationScene.isNextLevel else {
+        guard airScene.isNextLevel else {
             completion?()
             return
         }
@@ -205,7 +205,7 @@ class GameScene: SKScene {
     }
     
     private func waterSceneNextLevel(completion: Completion? = nil) {
-        guard deforestationScene.isNextLevel else {
+        guard waterScene.isNextLevel else {
             completion?()
             return
         }

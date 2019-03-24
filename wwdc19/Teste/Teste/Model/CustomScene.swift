@@ -62,6 +62,7 @@ extension CustomScene {
         backgroundNode.resize(with: scale)
         parentNode.addChild(backgroundNode)
         customScene.triggerInitialActions()
+        (customScene as? PlanetCardScene)?.hideButton()
         return customScene
     }
     
