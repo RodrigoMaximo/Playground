@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 enum Constants {
     static let timeBetweenAnimations: TimeInterval = 1.0
@@ -25,5 +26,11 @@ enum Constants {
     
     enum Water {
         static let timeToHideTrash: TimeInterval = 1.0
+        static let timeToAnimateWater: TimeInterval = 1.0
+        static let distanceWater1: CGFloat = 20
+        static let distanceWater2: CGFloat = 8
+        static let distanceWater3: CGFloat = 25
+        static let distanceWater4: CGFloat = 25
+        static let distanceTrash: CGFloat = 10
     }
 }

@@ -58,7 +58,35 @@ class WaterScene: SKScene, CustomScene {
     }
     
     func triggerInitialActions() {
-        
+        animateWater()
+        animateTrash()
+    }
+    
+    private func animateWater() {
+        let duration = Constants.Water.timeToAnimateWater
+        let ocean1SequenceAction = sequenceAction(distanceX: Constants.Water.distanceWater1, distanceY: 0, duration: duration)
+        let ocean2SequenceAction = sequenceAction(distanceX: Constants.Water.distanceWater2, distanceY: 0, duration: duration)
+        let ocean3SequenceAction = sequenceAction(distanceX: Constants.Water.distanceWater3, distanceY: 0, duration: duration)
+        let ocean4SequenceAction = sequenceAction(distanceX: Constants.Water.distanceWater4, distanceY: 0, duration: duration)
+        oceanNode1.run(.repeatForever(ocean1SequenceAction))
+        oceanNode2.run(.repeatForever(ocean2SequenceAction))
+        oceanNode3.run(.repeatForever(ocean3SequenceAction))
+        oceanNode4.run(.repeatForever(ocean4SequenceAction))
+    }
+    
+    private func animateTrash() {
+        let duration = Constants.Water.timeToAnimateWater
+        let distance = Constants.Water.distanceTrash
+        let action = sequenceAction(distanceX: distance, distanceY: distance, duration: duration)
+        oilNode.run(.repeatForever(action))
+    }
+    
+    private func sequenceAction(distanceX: CGFloat, distanceY: CGFloat, duration: TimeInterval) -> SKAction {
+        let waterAction1 = SKAction.moveBy(x: -distanceX, y: -distanceY, duration: duration)
+        let waterAction2 = SKAction.moveBy(x: distanceX, y: distanceY, duration: duration)
+        let waterAction3 = SKAction.moveBy(x: distanceX, y: distanceY, duration: duration)
+        let waterAction4 = SKAction.moveBy(x: -distanceX, y: -distanceY, duration: duration)
+        return SKAction.sequence([waterAction1, waterAction2, waterAction3, waterAction4])
     }
     
     func touchTrash(node: SKNode, completion: ((Bool) -> Void)? = nil) {
