@@ -16,5 +16,9 @@ enum Constants {
     }
     enum Air {
         static let timeToSmoke: TimeInterval = 1.0
+        static let timeToHideFactory: TimeInterval = 1.0
+        static let timeToShowTree: TimeInterval = 0.3
+        static let timeToChangeCar: TimeInterval = 0.5
+        static let timeToSkyChange: TimeInterval = 0.5
     }
 }

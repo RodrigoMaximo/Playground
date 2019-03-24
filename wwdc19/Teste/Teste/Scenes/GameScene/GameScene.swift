@@ -79,8 +79,25 @@ class GameScene: SKScene {
     
     private func touchDown(touchedNode: SKNode) {
         print(type(of: touchedNode))
-        moveQuadrants(completion: {})
-        airScene.animateSmoke()
+        airScene.carNodeTouched(touchedNode) { [weak self] in
+            self?.airSceneNextLevel()
+        }
+        switch touchedNode {
+        case airScene.factoryNode:
+            airScene.touchFactory() { [weak self] in
+                self?.airSceneNextLevel()
+            }
+        default:
+            return
+        }
+    }
+    
+    private func airSceneNextLevel() {
+        if airScene.isNextLevel {
+            airScene.animateCleanSky() {
+                print("Next level")
+            }
+        }
     }
     
     private func allPlanetAnimations(completion: Completion?) {
