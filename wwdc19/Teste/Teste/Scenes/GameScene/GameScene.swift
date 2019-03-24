@@ -27,6 +27,7 @@ class GameScene: SKScene {
     var planetCardScene: PlanetCardScene!
     var airScene: AirScene!
     var waterScene: WaterScene!
+    var deforestationScene: DeforestationScene!
     
     // MARK: - Backgrounds
     var scenesBackgroundNode: SKSpriteNode!
@@ -56,6 +57,7 @@ class GameScene: SKScene {
         setupScenes()
         airScene.animateMoveTo(quadrant: .first, duration: 0.0, completion: nil)
         waterScene.animateMoveTo(quadrant: .third, duration: 0.0, completion: nil)
+        deforestationScene.animateMoveTo(quadrant: .second, duration: 0.0, completion: nil)
     }
     
     private func setupBackgroundNodes() {
@@ -73,6 +75,7 @@ class GameScene: SKScene {
         setupPlanetCardScene()
         setupAirScene()
         setupWaterScene()
+        setupDeforestationScene()
     }
     
     private func setupPlanetCardScene() {
@@ -88,6 +91,11 @@ class GameScene: SKScene {
     private func setupWaterScene() {
         let scale = Scale(x: 1, y: 1)
         waterScene = WaterScene.loadBackground(with: scale, forParentNode: scenesBackgroundNode)
+    }
+    
+    private func setupDeforestationScene() {
+        let scale = Scale(x: 1, y: 1)
+        deforestationScene = DeforestationScene.loadBackground(with: scale, forParentNode: scenesBackgroundNode)
     }
     
     private func touchDown(touchedNode: SKNode) {
@@ -142,6 +150,8 @@ class GameScene: SKScene {
             customScene = airScene
         case waterScene.selectionNode:
             customScene = waterScene
+        case deforestationScene.selectionNode:
+            customScene = deforestationScene
         default:
             break
         }

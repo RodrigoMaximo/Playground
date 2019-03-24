@@ -46,4 +46,12 @@ enum Constants {
         static let distanceToBadSmell2: CGFloat = 120
         static let distanceToBadSmell3: CGFloat = 110
     }
+    
+    enum Deforestation {
+        static let timeToCloud1: TimeInterval = 200.0
+        static let timeToCloud2: TimeInterval = 180.0
+        static let timeToCloud3: TimeInterval = 190.0
+        static let chainSawMovement: CGFloat = 6.0
+        static let timeToChain: TimeInterval = 0.1
+    }
 }
