@@ -32,12 +32,18 @@ class GameScene: SKScene {
     // MARK: - Backgrounds
     var scenesBackgroundNode: SKSpriteNode!
     var planetBackgroundNode: SKSpriteNode!
+    var textBackgroundNode: SKSpriteNode!
     
     // MARK: - Planet information
     var planetBackgroundPosition: CGPoint!
     var planetBackgroundScale: Scale!
     
     var isProcessingTouch = false
+    
+    // MARK: text voice
+    var labelNode: SKLabelNode!
+    let synth = AVSpeechSynthesizer()
+    var myUtterance = AVSpeechUtterance(string: "")
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let scene = self.scene!
@@ -50,6 +56,7 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         super.didMove(to: view)
         setup()
+        textToSpeech(textLabel: labelNode)
     }
     
     private func setup() {
@@ -63,6 +70,8 @@ class GameScene: SKScene {
     private func setupBackgroundNodes() {
         setupPlanetBackground()
         scenesBackgroundNode = self.childNode(withName: "scenesBackgroundNode") as? SKSpriteNode
+        textBackgroundNode = self.childNode(withName: "textBackgroundNode") as? SKSpriteNode
+        labelNode = self.childNode(withName: "labelNode") as? SKLabelNode
     }
     
     private func setupPlanetBackground() {
@@ -267,37 +276,13 @@ class GameScene: SKScene {
     }
     
     
-    // MARK: - Old code
+    // MARK: - Text
     
-    private func atlasAnimation() {
-        
-        func animate() {
-            let action = SKAction.animate(with: fishFrames, timePerFrame: 0.3, resize: false, restore: true)
-            fishNode.run(SKAction.repeatForever(action))
-        }
-        
-        let fishAtlas = SKTextureAtlas(named: "fish")
-        fishFrames = fishAtlas.textureNames.map { fishAtlas.textureNamed($0) }
-        fishNode = SKSpriteNode(texture: fishFrames.first)
-        self.addChild(fishNode)
-        animate()
-    }
-    
-    private func video() {
-        let filePath = Bundle.main.path(forResource: "animation", ofType: "mp4")!
-        let url = URL(fileURLWithPath: filePath)
-        self.bgVideoPlayer = AVPlayer(url: url)
-        self.bgVideoPlayer.actionAtItemEnd = .none
-        
-        videoNode = SKVideoNode(avPlayer: self.bgVideoPlayer)
-        videoNode.size = CGSize(width: 500, height: 250)
-        videoNode.zPosition = -1
-        videoNode.alpha = 1.0
-        self.addChild(videoNode)
-        videoNode.play()
-    }
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+    func textToSpeech(textLabel: SKLabelNode) {
+        guard let text = textLabel.text else { return }
+        myUtterance = AVSpeechUtterance(string: text)
+        myUtterance.rate = 0.4
+        myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        synth.speak(myUtterance)
     }
 }
