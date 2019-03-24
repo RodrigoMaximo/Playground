@@ -32,5 +32,6 @@ enum Constants {
         static let distanceWater3: CGFloat = 25
         static let distanceWater4: CGFloat = 25
         static let distanceTrash: CGFloat = 10
+        static let timeToChangeWater: TimeInterval = 0.3
     }
 }

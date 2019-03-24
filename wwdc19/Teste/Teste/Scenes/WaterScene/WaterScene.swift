@@ -79,6 +79,12 @@ class WaterScene: SKScene, CustomScene {
         let distance = Constants.Water.distanceTrash
         let action = sequenceAction(distanceX: distance, distanceY: distance, duration: duration)
         oilNode.run(.repeatForever(action))
+        canNode1.run(.repeatForever(action))
+        canNode2.run(.repeatForever(action))
+        bottleNode.run(.repeatForever(action))
+        fishNode1.run(.repeatForever(action))
+        fishNode2.run(.repeatForever(action))
+        fishNode3.run(.repeatForever(action))
     }
     
     private func sequenceAction(distanceX: CGFloat, distanceY: CGFloat, duration: TimeInterval) -> SKAction {
@@ -100,5 +106,41 @@ class WaterScene: SKScene, CustomScene {
             node.removeFromParent()
             completion?(true)
         }
+    }
+    
+    func animateOceanCleaning(completion: Completion? = nil) {
+        func texture(for ocean: Int, animationValue: Int) -> SKTexture {
+            if animationValue == 7 {
+                return SKTexture(imageNamed: "cleaned-ocean-\(String(ocean))")
+            }
+            return SKTexture(imageNamed: "ocean-\(String(ocean))-\(String(animationValue))")
+        }
+        
+        var actions = [SKAction]()
+        for ocean in 1...4 {
+            var textures = [SKTexture]()
+            for animationValue in 1...7 {
+                textures.append(texture(for: ocean, animationValue: animationValue))
+            }
+            actions.append(SKAction.animate(with: textures, timePerFrame: Constants.Water.timeToChangeWater))
+        }
+        oceanNode1.run(actions[0])
+        oceanNode2.run(actions[1])
+        oceanNode3.run(actions[2])
+        oceanNode4.run(actions[3])
+        backgroundNode.run(.wait(forDuration: Constants.Water.timeToChangeWater * 7), completion: completion ?? {})
+    }
+    
+    private func animateDeadFish(completion: Completion? = nil) {
+        let duration = Constants.timeBetweenAnimations
+        let fadeOutAction = SKAction.fadeOut(withDuration: duration)
+        fishNode1.run(fadeOutAction)
+        fishNode2.run(fadeOutAction)
+        fishNode3.run(fadeOutAction)
+        backgroundNode.run(.wait(forDuration: duration), completion: completion ?? {})
+    }
+    
+    private func showLiveFish(completion: Completion? = nil) {
+        
     }
 }

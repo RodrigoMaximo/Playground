@@ -176,13 +176,15 @@ class GameScene: SKScene {
     
     private func waterSceneNextLevel(completion: Completion? = nil) {
         if waterScene.isNextLevel {
-            self.animatePlanetToCenter { [weak self] in
-                self?.planetCardScene.animatePlanetToNextStage() {
-                    self?.animatePlanetToOrigin() {
-                        self?.waterScene.animateMoveTo(quadrant: .second, duration: Constants.timeBetweenAnimations) {
-                            self?.waterScene.backgroundNode.isPaused = true
-                            // TODO: - visual for completion task
-                            completion?()
+            self.waterScene.animateOceanCleaning { [weak self] in
+                self?.animatePlanetToCenter {
+                    self?.planetCardScene.animatePlanetToNextStage() {
+                        self?.animatePlanetToOrigin() {
+                            self?.waterScene.animateMoveTo(quadrant: .second, duration: Constants.timeBetweenAnimations) {
+                                self?.waterScene.backgroundNode.isPaused = true
+                                // TODO: - visual for completion task
+                                completion?()
+                            }
                         }
                     }
                 }
