@@ -14,9 +14,13 @@ enum Quadrant: CaseIterable {
     case third
     case fourth
     
+    private static let hasMargin: Bool = true
+    private static let percentage: CGFloat = 0.2
+    
     func coordinates(size: CGSize) -> CGPoint {
-        var x: CGFloat = size.width / CGFloat(Quadrant.allCases.count)
-        var y: CGFloat = size.height / CGFloat(Quadrant.allCases.count)
+        let numberOfQuadrants = CGFloat(Quadrant.allCases.count)
+        var x: CGFloat = (size.width / numberOfQuadrants) * (1.0 - Quadrant.percentage/3.0)
+        var y: CGFloat = (size.height / numberOfQuadrants) * (1.0 - Quadrant.percentage/3.0)
         switch self {
         case .first:
             (x, y) = (x, y)
@@ -31,6 +35,7 @@ enum Quadrant: CaseIterable {
     }
     
     static var scale: CGFloat {
-        return 1.0 / (CGFloat(self.allCases.count) / 2.0)
+        let marginPercentage: CGFloat = hasMargin ? percentage : 0.0
+        return (1.0 - marginPercentage) / (CGFloat(self.allCases.count) / 2.0)
     }
 }
