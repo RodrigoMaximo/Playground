@@ -12,7 +12,7 @@ import CoreGraphics
 enum Constants {
     static let timeBetweenAnimations: TimeInterval = 1.0
     enum Planet {
-        static let timeInStageAnimation: TimeInterval = 1.0
+        static let timeInStageAnimation: TimeInterval = 0.4
         static let timeToCenter: TimeInterval = 1.5
         static let timeToOrigin: TimeInterval = 1.5
     }
@@ -48,7 +48,7 @@ enum Constants {
     }
     
     enum Deforestation {
-        static let timeToCloud1: TimeInterval = 200.0
+        static let timeToCloud1: TimeInterval = 100.0
         static let timeToCloud2: TimeInterval = 180.0
         static let timeToCloud3: TimeInterval = 190.0
         static let chainSawMovement: CGFloat = 6.0

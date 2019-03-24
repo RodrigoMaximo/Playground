@@ -18,7 +18,6 @@ class PlanetCardScene: SKScene, CustomScene {
         case one
         case two
         case three
-        case four
     }
     
     var backgroundNode: SKSpriteNode!
@@ -46,11 +45,9 @@ class PlanetCardScene: SKScene, CustomScene {
             case .two:
                 self.animatePlanetStageThree(completion: completion)
             case .three:
-                self.animatePlanetStageFour(completion: completion)
-            case .four:
                 return
             }
-            self.currentStage = Stage(rawValue: self.currentStage.rawValue + 1) ?? .four
+            self.currentStage = Stage(rawValue: self.currentStage.rawValue + 1) ?? .three
         }
     }
     
@@ -63,20 +60,20 @@ class PlanetCardScene: SKScene, CustomScene {
     }
     
     private func animatePlanetStageThree(completion: Completion?) {
-        animatePlanet(forImageName: "low-happy-planet", completion: completion)
-    }
-    
-    private func animatePlanetStageFour(completion: Completion?) {
         animatePlanet(forImageName: "happy-planet", completion: completion)
     }
     
     private func animatePlanet(forImageName imageName: String, completion: Completion?) {
         let initialTexture = SKTexture(imageNamed: "\(imageName)-1")
-        let textures = [
+        var textures = [
             SKTexture(imageNamed: "\(imageName)-2"),
             SKTexture(imageNamed: "\(imageName)-3"),
-            SKTexture(imageNamed: "\(imageName)-4")
+            SKTexture(imageNamed: "\(imageName)-4"),
+            SKTexture(imageNamed: "\(imageName)-5")
         ]
+        if imageName == "happy-planet" {
+            textures.append(SKTexture(imageNamed: "\(imageName)-6"))
+        }
         planetNode.run(.wait(forDuration: Constants.timeBetweenAnimations)) { [weak self] in
             self?.planetNode.animate(with: textures, initialTexture: initialTexture, timePerFrame: Constants.Planet.timeInStageAnimation, completion: completion)
         }

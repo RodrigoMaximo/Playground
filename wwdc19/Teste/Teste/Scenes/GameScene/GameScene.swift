@@ -190,7 +190,7 @@ class GameScene: SKScene {
                 self?.animatePlanetToCenter {
                     self?.planetCardScene.animatePlanetToNextStage() {
                         self?.animatePlanetToOrigin() {
-                            self?.waterScene.animateMoveTo(quadrant: .second, duration: Constants.timeBetweenAnimations) {
+                            self?.waterScene.animateMoveTo(quadrant: .third, duration: Constants.timeBetweenAnimations) {
                                 self?.waterScene.selectionNode.isPaused = true
                                 completion?()
                             }
