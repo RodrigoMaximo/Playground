@@ -41,5 +41,9 @@ enum Constants {
         static let distanceToTravelFish2: CGFloat = 50
         static let distanceToTravelFish3: CGFloat = 50
         static let distanceToTravelFish4: CGFloat = 50
+        static let timeBadSmell: TimeInterval = 3.0
+        static let distanceToBadSmell1: CGFloat = 115
+        static let distanceToBadSmell2: CGFloat = 120
+        static let distanceToBadSmell3: CGFloat = 110
     }
 }

@@ -30,6 +30,9 @@ class WaterScene: SKScene, CustomScene {
     var fishNode2: SKSpriteNode!
     var fishNode3: SKSpriteNode!
     var fishNode4: SKSpriteNode!
+    var badSmellNode1: SKSpriteNode!
+    var badSmellNode2: SKSpriteNode!
+    var badSmellNode3: SKSpriteNode!
     var trashNodes: [SKSpriteNode]!
     
     var objectsTouched: Int = 0
@@ -60,15 +63,37 @@ class WaterScene: SKScene, CustomScene {
         fishNode2 = backgroundCrop.childNode(withName: "fishNode2") as? SKSpriteNode
         fishNode3 = backgroundCrop.childNode(withName: "fishNode3") as? SKSpriteNode
         fishNode4 = backgroundCrop.childNode(withName: "fishNode4") as? SKSpriteNode
+        badSmellNode1 = backgroundCrop.childNode(withName: "badSmellNode1") as? SKSpriteNode
+        badSmellNode2 = backgroundCrop.childNode(withName: "badSmellNode2") as? SKSpriteNode
+        badSmellNode3 = backgroundCrop.childNode(withName: "badSmellNode3") as? SKSpriteNode
         backgroundNode.isPaused = false
         trashNodes = [wasteNode1, wasteNode2, canNode1, canNode2, oilNode, bottleNode]
         cropBackground()
     }
     
     func triggerInitialActions() {
+        animateBadSmell()
         animateWater()
         animateTrash()
         animateLiveFish()
+    }
+    
+    private func animateBadSmell() {
+        func actionBadSmell(initialPosition: CGPoint, distanceX: CGFloat, distanceY: CGFloat, duration: TimeInterval) -> SKAction {
+            let actionMove = SKAction.moveBy(x: distanceX, y: distanceY, duration: duration)
+            let actionFadeout = SKAction.fadeOut(withDuration: duration)
+            let groupAction = SKAction.group([actionMove, actionFadeout])
+            let actionInitialPosition = SKAction.move(to: initialPosition, duration: 0)
+            let fadeInAction = SKAction.fadeIn(withDuration: duration/3)
+            return SKAction.sequence([groupAction, actionInitialPosition, fadeInAction])
+        }
+        let duration = Constants.Water.timeBadSmell
+        let actionSmell1 = actionBadSmell(initialPosition: badSmellNode1.position, distanceX: 0, distanceY: Constants.Water.distanceToBadSmell1, duration: duration)
+        let actionSmell2 = actionBadSmell(initialPosition: badSmellNode2.position, distanceX: 0, distanceY: Constants.Water.distanceToBadSmell1, duration: duration)
+        let actionSmell3 = actionBadSmell(initialPosition: badSmellNode3.position, distanceX: 0, distanceY: Constants.Water.distanceToBadSmell1, duration: duration)
+        badSmellNode1.run(.repeatForever(actionSmell1))
+        badSmellNode2.run(.repeatForever(actionSmell2))
+        badSmellNode3.run(.repeatForever(actionSmell3))
     }
     
     private func animateWater() {
@@ -97,11 +122,11 @@ class WaterScene: SKScene, CustomScene {
     }
     
     private func sequenceAction(distanceX: CGFloat, distanceY: CGFloat, duration: TimeInterval) -> SKAction {
-        let waterAction1 = SKAction.moveBy(x: -distanceX, y: -distanceY, duration: duration)
-        let waterAction2 = SKAction.moveBy(x: distanceX, y: distanceY, duration: duration)
-        let waterAction3 = SKAction.moveBy(x: distanceX, y: distanceY, duration: duration)
-        let waterAction4 = SKAction.moveBy(x: -distanceX, y: -distanceY, duration: duration)
-        return SKAction.sequence([waterAction1, waterAction2, waterAction3, waterAction4])
+        let action1 = SKAction.moveBy(x: -distanceX, y: -distanceY, duration: duration)
+        let action2 = SKAction.moveBy(x: distanceX, y: distanceY, duration: duration)
+        let action3 = SKAction.moveBy(x: distanceX, y: distanceY, duration: duration)
+        let action4 = SKAction.moveBy(x: -distanceX, y: -distanceY, duration: duration)
+        return SKAction.sequence([action1, action2, action3, action4])
     }
     
     private func animateLiveFish() {
@@ -161,6 +186,7 @@ class WaterScene: SKScene, CustomScene {
         oceanNode4.run(actions[3])
         backgroundNode.run(.wait(forDuration: Constants.Water.timeToChangeWater * 7)) { [weak self] in
             self?.animateDeadFish()
+            self?.stopAnimateBedSmall()
             self?.showLiveFish(completion: completion)
         }
     }
@@ -185,6 +211,18 @@ class WaterScene: SKScene, CustomScene {
         fishNode4.run(fadeInAction)
         backgroundNode.run(.wait(forDuration: duration)) {
             completion?()
+        }
+    }
+    
+    private func stopAnimateBedSmall() {
+        let fadeOutAction = SKAction.fadeOut(withDuration: Constants.timeBetweenAnimations)
+        badSmellNode1.run(fadeOutAction)
+        badSmellNode2.run(fadeOutAction)
+        badSmellNode3.run(fadeOutAction)
+        backgroundNode.run(.wait(forDuration: Constants.timeBetweenAnimations)) { [weak self] in
+            self?.badSmellNode1.isPaused = true
+            self?.badSmellNode2.isPaused = true
+            self?.badSmellNode3.isPaused = true
         }
     }
 }
