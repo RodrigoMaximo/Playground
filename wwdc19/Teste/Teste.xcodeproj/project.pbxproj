@@ -26,6 +26,8 @@
 		1FD7F62D2246E8A30013976D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7F62C2246E8A30013976D /* Constants.swift */; };
 		1FD7F630224734840013976D /* AirScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7F62F224734840013976D /* AirScene.swift */; };
 		1FD7F632224734D00013976D /* AirScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FD7F631224734D00013976D /* AirScene.sks */; };
+		1FD7F635224791B30013976D /* WaterScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FD7F634224791B30013976D /* WaterScene.sks */; };
+		1FD7F637224796290013976D /* WaterScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7F636224796290013976D /* WaterScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		1FD7F62C2246E8A30013976D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1FD7F62F224734840013976D /* AirScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirScene.swift; sourceTree = "<group>"; };
 		1FD7F631224734D00013976D /* AirScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AirScene.sks; sourceTree = "<group>"; };
+		1FD7F634224791B30013976D /* WaterScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WaterScene.sks; sourceTree = "<group>"; };
+		1FD7F636224796290013976D /* WaterScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +132,7 @@
 		1F7FB11B2245F61F00F8868B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				1FD7F633224791A00013976D /* WaterScene */,
 				1FD7F62E224734710013976D /* AirScene */,
 				1F7FB11D2245F63800F8868B /* PlanetCardScene */,
 				1F7FB11C2245F63000F8868B /* GameScene */,
@@ -156,10 +161,19 @@
 		1FD7F62E224734710013976D /* AirScene */ = {
 			isa = PBXGroup;
 			children = (
-				1FD7F62F224734840013976D /* AirScene.swift */,
 				1FD7F631224734D00013976D /* AirScene.sks */,
+				1FD7F62F224734840013976D /* AirScene.swift */,
 			);
 			path = AirScene;
+			sourceTree = "<group>";
+		};
+		1FD7F633224791A00013976D /* WaterScene */ = {
+			isa = PBXGroup;
+			children = (
+				1FD7F634224791B30013976D /* WaterScene.sks */,
+				1FD7F636224796290013976D /* WaterScene.swift */,
+			);
+			path = WaterScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,6 +240,7 @@
 				1F1603622240928500BE48EC /* GameScene.sks in Resources */,
 				1F16036D2240928800BE48EC /* Assets.xcassets in Resources */,
 				1F1603702240928800BE48EC /* LaunchScreen.storyboard in Resources */,
+				1FD7F635224791B30013976D /* WaterScene.sks in Resources */,
 				1F7FB1032245C3DB00F8868B /* PlanetCardScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,6 +260,7 @@
 				1F7FB12322467A8C00F8868B /* Quadrant.swift in Sources */,
 				1F1603682240928500BE48EC /* GameViewController.swift in Sources */,
 				1F7FB1172245F5CA00F8868B /* CustomScene.swift in Sources */,
+				1FD7F637224796290013976D /* WaterScene.swift in Sources */,
 				1F7FB11F22461A7900F8868B /* Animate+SKSpriteNode.swift in Sources */,
 				1F7FB121224677E400F8868B /* Completion.swift in Sources */,
 				1F7FB1152245F34E00F8868B /* Scale.swift in Sources */,

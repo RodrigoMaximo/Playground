@@ -95,9 +95,9 @@ class AirScene: SKScene, CustomScene {
         }
     }
     
-    func carNodeTouched(_ node: SKNode, completion: Completion? = nil) {
+    func carNodeTouched(_ node: SKNode, completion: ((Bool) -> Void)? = nil) {
         guard let node = node as? SKSpriteNode, node.isPaused == false else {
-            completion?()
+            completion?(false)
             return
         }
         for carNode in carsNode where node == carNode {
@@ -110,12 +110,12 @@ class AirScene: SKScene, CustomScene {
                 carNode.run(fadeInaction) {
                     carNode.isPaused = true
                     self?.carsTouched += 1
-                    completion?()
+                    completion?(true)
                 }
             }
             return
         }
-        completion?()
+        completion?(false)
     }
     
     func animateCleanSky(completion: Completion?) {

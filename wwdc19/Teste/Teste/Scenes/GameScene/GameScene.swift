@@ -26,6 +26,7 @@ class GameScene: SKScene {
     // MARK: - Scenes
     var planetCardScene: PlanetCardScene!
     var airScene: AirScene!
+    var waterScene: WaterScene!
     
     // MARK: - Backgrounds
     var scenesBackgroundNode: SKSpriteNode!
@@ -54,6 +55,7 @@ class GameScene: SKScene {
         setupBackgroundNodes()
         setupScenes()
         airScene.animateMoveTo(quadrant: .first, duration: 0.0, completion: nil)
+        waterScene.animateMoveTo(quadrant: .second, duration: 0.0, completion: nil)
     }
     
     private func setupBackgroundNodes() {
@@ -70,6 +72,7 @@ class GameScene: SKScene {
     private func setupScenes() {
         setupPlanetCardScene()
         setupAirScene()
+        setupWaterScene()
     }
     
     private func setupPlanetCardScene() {
@@ -82,6 +85,11 @@ class GameScene: SKScene {
         airScene = AirScene.loadBackground(with: scale, forParentNode: scenesBackgroundNode)
     }
     
+    private func setupWaterScene() {
+        let scale = Scale(x: 1, y: 1)
+        waterScene = WaterScene.loadBackground(with: scale, forParentNode: scenesBackgroundNode)
+    }
+    
     private func touchDown(touchedNode: SKNode) {
         guard isProcessingTouch == false else { return }
         isProcessingTouch = true
@@ -90,11 +98,27 @@ class GameScene: SKScene {
         
         let group = DispatchGroup()
         group.enter()
-        airScene.carNodeTouched(touchedNode) { [weak self] in
-            self?.airSceneNextLevel() {
+        airScene.carNodeTouched(touchedNode) { [weak self] found in
+            if found {
+                self?.airSceneNextLevel() {
+                    group.leave()
+                }
+            } else {
                 group.leave()
             }
         }
+        
+        group.enter()
+        waterScene.touchTrash(node: touchedNode) { [weak self] found in
+            if found {
+                self?.waterSceneNextLevel() {
+                    group.leave()
+                }
+            } else {
+                group.leave()
+            }
+        }
+        
         switch touchedNode {
         case airScene.factoryNode:
             group.enter()
@@ -116,6 +140,8 @@ class GameScene: SKScene {
         switch touchedNode {
         case airScene.selectionNode:
             customScene = airScene
+        case waterScene.selectionNode:
+            customScene = waterScene
         default:
             break
         }
@@ -134,7 +160,29 @@ class GameScene: SKScene {
                 self?.animatePlanetToCenter {
                     self?.planetCardScene.animatePlanetToNextStage() {
                         self?.animatePlanetToOrigin() {
-                            self?.airScene.animateMoveTo(quadrant: .first, duration: Constants.timeBetweenAnimations, completion: completion)
+                            self?.airScene.animateMoveTo(quadrant: .first, duration: Constants.timeBetweenAnimations) {
+                                self?.airScene.backgroundNode.isPaused = true
+                                // TODO: - visual for completion task
+                                completion?()
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            completion?()
+        }
+    }
+    
+    private func waterSceneNextLevel(completion: Completion? = nil) {
+        if waterScene.isNextLevel {
+            self.animatePlanetToCenter { [weak self] in
+                self?.planetCardScene.animatePlanetToNextStage() {
+                    self?.animatePlanetToOrigin() {
+                        self?.waterScene.animateMoveTo(quadrant: .second, duration: Constants.timeBetweenAnimations) {
+                            self?.waterScene.backgroundNode.isPaused = true
+                            // TODO: - visual for completion task
+                            completion?()
                         }
                     }
                 }

@@ -22,4 +22,8 @@ enum Constants {
         static let timeToChangeCar: TimeInterval = 0.5
         static let timeToSkyChange: TimeInterval = 0.5
     }
+    
+    enum Water {
+        static let timeToHideTrash: TimeInterval = 1.0
+    }
 }
