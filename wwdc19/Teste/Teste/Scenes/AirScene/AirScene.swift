@@ -13,6 +13,7 @@ import AVFoundation
 class AirScene: SKScene, CustomScene {
     
     var backgroundNode: SKSpriteNode!
+    var backgroundCrop: SKSpriteNode!
     var frontCarNode1: SKSpriteNode!
     var frontCarNode2: SKSpriteNode!
     var mediumCarNode1: SKSpriteNode!
@@ -40,23 +41,35 @@ class AirScene: SKScene, CustomScene {
     
     func load() {
         backgroundNode = self.childNode(withName: "backgroundNode") as? SKSpriteNode
-        frontCarNode1 = backgroundNode.childNode(withName: "frontCarNode1") as? SKSpriteNode
-        frontCarNode2 = backgroundNode.childNode(withName: "frontCarNode2") as? SKSpriteNode
-        mediumCarNode1 = backgroundNode.childNode(withName: "mediumCarNode1") as? SKSpriteNode
-        mediumCarNode2 = backgroundNode.childNode(withName: "mediumCarNode2") as? SKSpriteNode
-        mediumCarNode3 = backgroundNode.childNode(withName: "mediumCarNode3") as? SKSpriteNode
-        behindCarNode1 = backgroundNode.childNode(withName: "behindCarNode1") as? SKSpriteNode
-        behindCarNode2 = backgroundNode.childNode(withName: "behindCarNode2") as? SKSpriteNode
-        behindCarNode3 = backgroundNode.childNode(withName: "behindCarNode3") as? SKSpriteNode
-        behindCarNode4 = backgroundNode.childNode(withName: "behindCarNode4") as? SKSpriteNode
-        skyNode = backgroundNode.childNode(withName: "skyNode") as? SKSpriteNode
-        factoryNode = backgroundNode.childNode(withName: "factoryNode") as? SKSpriteNode
-        treeNode1 = backgroundNode.childNode(withName: "treeNode1") as? SKSpriteNode
-        treeNode2 = backgroundNode.childNode(withName: "treeNode2") as? SKSpriteNode
-        treeNode3 = backgroundNode.childNode(withName: "treeNode3") as? SKSpriteNode
-        smokeNode = backgroundNode.childNode(withName: "smokeNode") as? SKSpriteNode
+        backgroundCrop = backgroundNode.childNode(withName: "backgroundCrop") as? SKSpriteNode
+        frontCarNode1 = backgroundCrop.childNode(withName: "frontCarNode1") as? SKSpriteNode
+        frontCarNode2 = backgroundCrop.childNode(withName: "frontCarNode2") as? SKSpriteNode
+        mediumCarNode1 = backgroundCrop.childNode(withName: "mediumCarNode1") as? SKSpriteNode
+        mediumCarNode2 = backgroundCrop.childNode(withName: "mediumCarNode2") as? SKSpriteNode
+        mediumCarNode3 = backgroundCrop.childNode(withName: "mediumCarNode3") as? SKSpriteNode
+        behindCarNode1 = backgroundCrop.childNode(withName: "behindCarNode1") as? SKSpriteNode
+        behindCarNode2 = backgroundCrop.childNode(withName: "behindCarNode2") as? SKSpriteNode
+        behindCarNode3 = backgroundCrop.childNode(withName: "behindCarNode3") as? SKSpriteNode
+        behindCarNode4 = backgroundCrop.childNode(withName: "behindCarNode4") as? SKSpriteNode
+        skyNode = backgroundCrop.childNode(withName: "skyNode") as? SKSpriteNode
+        factoryNode = backgroundCrop.childNode(withName: "factoryNode") as? SKSpriteNode
+        treeNode1 = backgroundCrop.childNode(withName: "treeNode1") as? SKSpriteNode
+        treeNode2 = backgroundCrop.childNode(withName: "treeNode2") as? SKSpriteNode
+        treeNode3 = backgroundCrop.childNode(withName: "treeNode3") as? SKSpriteNode
+        smokeNode = backgroundCrop.childNode(withName: "smokeNode") as? SKSpriteNode
         backgroundNode.isPaused = false
         carsNode = [frontCarNode1, frontCarNode2, mediumCarNode1, mediumCarNode2, mediumCarNode3, behindCarNode1, behindCarNode2, behindCarNode3, behindCarNode4]
+        cropBackground()
+    }
+    
+    private func cropBackground() {
+        let cropNode = SKCropNode()
+        cropNode.position = backgroundNode.position
+        cropNode.zPosition = 0
+        cropNode.maskNode = SKSpriteNode(color: .blue, size: backgroundNode.size)
+        backgroundCrop.removeFromParent()
+        cropNode.addChild(backgroundCrop)
+        backgroundNode.addChild(cropNode)
     }
     
     func triggerInitialActions() {

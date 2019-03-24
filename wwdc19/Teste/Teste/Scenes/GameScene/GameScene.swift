@@ -136,7 +136,7 @@ class GameScene: SKScene {
     }
     
     private func sceneTouhed(touchedNode: SKNode) -> Bool {
-        var customScene: (CustomScene & SKScene)?
+        var customScene: (CustomScene & SKNode)?
         switch touchedNode {
         case airScene.selectionNode:
             customScene = airScene
