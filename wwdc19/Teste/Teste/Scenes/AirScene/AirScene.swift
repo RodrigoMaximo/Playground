@@ -119,11 +119,14 @@ class AirScene: SKScene, CustomScene {
     }
     
     func animateCleanSky(completion: Completion?) {
-        let fadeOutAction = SKAction.fadeOut(withDuration: Constants.Air.timeToSkyChange)
-        let fadeInaction = SKAction.fadeIn(withDuration: Constants.Air.timeToSkyChange)
-        skyNode.run(fadeOutAction) { [weak self] in
-            self?.skyNode.texture = SKTexture(imageNamed: "sky-good")
-            self?.skyNode.run(fadeInaction, completion: completion ?? {})
+        let textures = [
+            SKTexture(imageNamed: "sky-bad-1"),
+            SKTexture(imageNamed: "sky-bad-2"),
+            SKTexture(imageNamed: "sky-bad-3"),
+            SKTexture(imageNamed: "sky-good")
+        ]
+        skyNode.run(.animate(with: textures, timePerFrame: Constants.Air.timeToSkyChange)) {
+            completion?()
         }
     }
     
