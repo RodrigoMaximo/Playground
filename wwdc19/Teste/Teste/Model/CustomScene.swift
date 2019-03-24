@@ -26,7 +26,7 @@ extension CustomScene {
         let finalScale = Quadrant.scale
         let finalPoint = quadrant.coordinates(size: backgroundNode.size)
         animateMoveTo(point: finalPoint, finalScale: finalScale, duration: duration) { [weak self] in
-            self?.backgroundNode.zPosition = 0
+            self?.backgroundNode.zPosition = 3
             completion?()
         }
     }
