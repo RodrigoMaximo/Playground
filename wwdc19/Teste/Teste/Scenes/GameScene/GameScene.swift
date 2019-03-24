@@ -69,17 +69,18 @@ class GameScene: SKScene {
     
     private func setupPlanetCardScene() {
         let scale = Scale(x: 1, y: 1)
-        planetCardScene = PlanetCardScene.loadBackground(with: scale, addBackgroundIn: planetBackgroundNode)
+        planetCardScene = PlanetCardScene.loadBackground(with: scale, forParentNode: planetBackgroundNode)
     }
     
     private func setupAirScene() {
         let scale = Scale(x: 1, y: 1)
-        airScene = AirScene.loadBackground(with: scale, addBackgroundIn: scenesBackgroundNode)
+        airScene = AirScene.loadBackground(with: scale, forParentNode: scenesBackgroundNode)
     }
     
     private func touchDown(touchedNode: SKNode) {
         print(type(of: touchedNode))
         moveQuadrants(completion: {})
+        airScene.animateSmoke()
     }
     
     private func allPlanetAnimations(completion: Completion?) {

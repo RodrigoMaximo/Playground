@@ -12,6 +12,7 @@ import SpriteKit
 protocol CustomScene where Self: SKScene {
     var backgroundNode: SKSpriteNode! { get set }
     func load()
+    func triggerInitialActions()
 }
 
 extension CustomScene {
@@ -39,27 +40,16 @@ extension CustomScene {
     /// Load the backgroundNode of the Scene.
     /// - Parameters:
     ///   - scale: This scale is the ratio between the backgroundNode and the scene in which it is been added.
-    ///   - scene: Scene that will add this backgroundNode.
+    ///   - parentNode: Parent node that will add this backgroundNode.
     /// - Returns: A scene with the backgroundNode and all the other nodes references.
-    static func loadBackground(with scale: Scale? = nil, addBackgroundIn scene: SKNode) -> Self? {
+    static func loadBackground(with scale: Scale? = nil, forParentNode parentNode: SKNode) -> Self? {
         guard let customScene = Self(fileNamed: String(describing: Self.self)) else { return nil }
         customScene.load()
         guard let backgroundNode = customScene.backgroundNode else { return nil }
         backgroundNode.removeFromParent()
         backgroundNode.resize(with: scale)
-        scene.addChild(backgroundNode)
+        parentNode.addChild(backgroundNode)
+        customScene.triggerInitialActions()
         return customScene
-    }
-    
-    static func loadBackground(with size: CGSize? = nil, addBackgroundIn scene: SKNode) -> Self? {
-        if let customScene = SKScene(fileNamed: String(describing: Self.self)) as? Self,
-            let backgroundNode = customScene.backgroundNode
-        {
-            backgroundNode.removeFromParent()
-            backgroundNode.resize(with: size)
-            scene.addChild(backgroundNode)
-            return customScene
-        }
-        return nil
     }
 }

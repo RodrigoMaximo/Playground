@@ -14,4 +14,7 @@ enum Constants {
         static let timeToCenter: TimeInterval = 1.0
         static let timeToOrigin: TimeInterval = 1.0
     }
+    enum Air {
+        static let timeToSmoke: TimeInterval = 1.0
+    }
 }

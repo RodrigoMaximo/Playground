@@ -29,6 +29,8 @@ class PlanetCardScene: SKScene, CustomScene {
         planetNode = backgroundNode.childNode(withName: "planetNode") as? SKSpriteNode
     }
     
+    func triggerInitialActions() {}
+    
     func animatePlanet(for stage: Stage, completion: Completion? = nil) {
         switch stage {
         case .one:
