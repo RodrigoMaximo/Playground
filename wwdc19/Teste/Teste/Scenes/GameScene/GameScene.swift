@@ -195,7 +195,9 @@ class GameScene: SKScene {
                     self?.animatePlanetToOrigin() {
                         self?.airScene.animateMoveTo(quadrant: .first, duration: Constants.timeBetweenAnimations) {
                             self?.airScene.selectionNode.isPaused = true
-                            // TODO: - visual for completion task
+                            if self?.planetCardScene.currentStage == .three {
+                                self?.presentWWDCScene()
+                            }
                             completion?()
                         }
                     }
@@ -215,6 +217,9 @@ class GameScene: SKScene {
                     self?.animatePlanetToOrigin() {
                         self?.waterScene.animateMoveTo(quadrant: .third, duration: Constants.timeBetweenAnimations) {
                             self?.waterScene.selectionNode.isPaused = true
+                            if self?.planetCardScene.currentStage == .three {
+                                self?.presentWWDCScene()
+                            }
                             completion?()
                         }
                     }
@@ -234,6 +239,9 @@ class GameScene: SKScene {
                     self?.animatePlanetToOrigin() {
                         self?.deforestationScene.animateMoveTo(quadrant: .second, duration: Constants.timeBetweenAnimations) {
                             self?.deforestationScene.selectionNode.isPaused = true
+                            if self?.planetCardScene.currentStage == .three {
+                                self?.presentWWDCScene()
+                            }
                             completion?()
                         }
                     }
@@ -284,5 +292,14 @@ class GameScene: SKScene {
         myUtterance.rate = 0.4
         myUtterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         synth.speak(myUtterance)
+    }
+    
+    private func presentWWDCScene() {
+        let transition: SKTransition = SKTransition.fade(withDuration: 1)
+        if let scene = PlanetCardScene(fileNamed: "PlanetCardScene") {
+            scene.scaleMode = .aspectFit
+            self.view?.presentScene(scene, transition: transition)
+            scene.showWWDC = true
+        }
     }
 }

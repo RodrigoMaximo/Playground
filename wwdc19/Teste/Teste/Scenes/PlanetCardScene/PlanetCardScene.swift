@@ -27,8 +27,18 @@ class PlanetCardScene: SKScene, CustomScene {
     var labelNode: SKLabelNode!
     
     var currentStage: Stage = .zero
+    var showWWDC: Bool = false {
+        didSet {
+            if showWWDC { animateShowWWDC() }
+        }
+    }
     
     var selectionNode: SKSpriteNode!
+    
+    override func didMove(to view: SKView) {
+        super.didMove(to: view)
+        load()
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let scene = self.scene!
@@ -113,5 +123,24 @@ class PlanetCardScene: SKScene, CustomScene {
         self.labelNode.fontColor = .red
         self.labelNode.text = "Sad 😭"
         self.planetNode.texture = SKTexture(imageNamed: "sad-planet-1")
+    }
+    
+    func animateShowWWDC() {
+        self.buttonNode.isHidden = false
+        self.labelNode.fontColor = .white
+        animateWWDC()
+    }
+    
+    private func animateWWDC() {
+        self.labelNode.text = "WWDC 2019 👩‍💻👨‍💻"
+        self.buttonNode.isHidden = true
+        self.labelNode.alpha = 0.0
+        labelNode.run(SKAction.fadeIn(withDuration: 1.0)) { [weak self] in
+            self?.labelNode.run(.wait(forDuration: 10.0)) {
+                self?.labelNode.text = "Restart"
+                self?.labelNode.fontColor = .black
+                self?.buttonNode.isHidden = false
+            }
+        }
     }
 }

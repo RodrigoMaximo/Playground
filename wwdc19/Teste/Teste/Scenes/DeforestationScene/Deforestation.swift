@@ -109,6 +109,7 @@ class DeforestationScene: SKScene, CustomScene {
         let action4 = SKAction.fadeIn(withDuration: duration)
         let action5 = SKAction.fadeIn(withDuration: duration)
         let action6 = SKAction.fadeIn(withDuration: duration)
+        falledTrees.run(SKAction.fadeOut(withDuration: duration))
         treeNode1.run(action1) { [weak self] in
             self?.treeNode2.run(action2) {
                 self?.treeNode3.run(action3) {
