@@ -33,8 +33,10 @@ class AirScene: SKScene, CustomScene {
     var isFactoryTouched: Bool = false
     var carsTouched: Int = 0
     var isNextLevel: Bool {
-        return carsTouched >= 3 && isFactoryTouched
+        return carsTouched == 3 && isFactoryTouched
     }
+    
+    var selectionNode: SKSpriteNode!
     
     func load() {
         backgroundNode = self.childNode(withName: "backgroundNode") as? SKSpriteNode

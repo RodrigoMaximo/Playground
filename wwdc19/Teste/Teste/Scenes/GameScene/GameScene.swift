@@ -53,6 +53,7 @@ class GameScene: SKScene {
     private func setup() {
         setupBackgroundNodes()
         setupScenes()
+        airScene.animateMoveTo(quadrant: .first, duration: 0.0, completion: nil)
     }
     
     private func setupBackgroundNodes() {
@@ -84,7 +85,9 @@ class GameScene: SKScene {
     private func touchDown(touchedNode: SKNode) {
         guard isProcessingTouch == false else { return }
         isProcessingTouch = true
-        print(type(of: touchedNode))
+        
+        guard sceneTouhed(touchedNode: touchedNode) == false else { return }
+        
         let group = DispatchGroup()
         group.enter()
         airScene.carNodeTouched(touchedNode) { [weak self] in
@@ -108,12 +111,31 @@ class GameScene: SKScene {
         }
     }
     
+    private func sceneTouhed(touchedNode: SKNode) -> Bool {
+        var customScene: (CustomScene & SKScene)?
+        switch touchedNode {
+        case airScene.selectionNode:
+            customScene = airScene
+        default:
+            break
+        }
+        if let scene = customScene {
+            scene.animateMoveToOrigin(duration: Constants.timeBetweenAnimations) {
+                self.isProcessingTouch = false
+            }
+            return true
+        }
+        return false
+    }
+    
     private func airSceneNextLevel(completion: Completion? = nil) {
         if airScene.isNextLevel {
             airScene.animateCleanSky { [weak self] in
                 self?.animatePlanetToCenter {
                     self?.planetCardScene.animatePlanetToNextStage() {
-                        self?.animatePlanetToOrigin(completion: completion)
+                        self?.animatePlanetToOrigin() {
+                            self?.airScene.animateMoveTo(quadrant: .first, duration: Constants.timeBetweenAnimations, completion: completion)
+                        }
                     }
                 }
             }

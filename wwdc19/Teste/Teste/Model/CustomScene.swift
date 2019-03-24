@@ -11,19 +11,25 @@ import SpriteKit
 
 protocol CustomScene where Self: SKScene {
     var backgroundNode: SKSpriteNode! { get set }
+    var selectionNode: SKSpriteNode! { get set }
     func load()
     func triggerInitialActions()
 }
 
 extension CustomScene {
     
-    func animateMoveTo(quadrant: Quadrant, duration: TimeInterval, completion: Completion?) {
+    mutating func animateMoveTo(quadrant: Quadrant, duration: TimeInterval, completion: Completion?) {
+        selectionNode = SKSpriteNode()
+        selectionNode.size = self.size
+        selectionNode.zPosition = 50
+        backgroundNode.addChild(selectionNode)
         let finalScale = Quadrant.scale
         let finalPoint = quadrant.coordinates(size: backgroundNode.size)
         animateMoveTo(point: finalPoint, finalScale: finalScale, duration: duration, completion: completion)
     }
     
     func animateMoveToOrigin(duration: TimeInterval, completion: Completion?) {
+        selectionNode.removeFromParent()
         let finalScale: CGFloat = 1.0
         let origin = CGPoint(x: 0, y: 0)
         animateMoveTo(point: origin, finalScale: finalScale, duration: duration, completion: completion)

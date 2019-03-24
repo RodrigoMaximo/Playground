@@ -25,6 +25,8 @@ class PlanetCardScene: SKScene, CustomScene {
     var planetNode: SKSpriteNode!
     var currentStage: Stage = .zero
     
+    var selectionNode: SKSpriteNode!
+    
     func load() {
         backgroundNode = self.childNode(withName: "backgroundNode") as? SKSpriteNode
         skyNode = backgroundNode.childNode(withName: "skyNode") as? SKEmitterNode
