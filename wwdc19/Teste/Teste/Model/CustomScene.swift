@@ -11,6 +11,7 @@ import SpriteKit
 
 protocol CustomScene where Self: SKScene {
     var backgroundNode: SKSpriteNode! { get set }
+    var backgroundCrop: SKSpriteNode! { get set }
     var selectionNode: SKSpriteNode! { get set }
     func load()
     func triggerInitialActions()
@@ -61,5 +62,15 @@ extension CustomScene {
         parentNode.addChild(backgroundNode)
         customScene.triggerInitialActions()
         return customScene
+    }
+    
+    func cropBackground() {
+        let cropNode = SKCropNode()
+        cropNode.position = backgroundNode.position
+        cropNode.zPosition = 0
+        cropNode.maskNode = SKSpriteNode(color: .blue, size: backgroundNode.size)
+        backgroundCrop.removeFromParent()
+        cropNode.addChild(backgroundCrop)
+        backgroundNode.addChild(cropNode)
     }
 }

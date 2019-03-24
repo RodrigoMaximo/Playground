@@ -11,6 +11,7 @@ import GameplayKit
 import AVFoundation
 
 class PlanetCardScene: SKScene, CustomScene {
+    var backgroundCrop: SKSpriteNode!
     
     enum Stage: Int {
         case zero = 0

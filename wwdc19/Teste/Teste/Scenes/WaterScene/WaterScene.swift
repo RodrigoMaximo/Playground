@@ -34,24 +34,27 @@ class WaterScene: SKScene, CustomScene {
     }
     
     var selectionNode: SKSpriteNode!
+    var backgroundCrop: SKSpriteNode!
     
     func load() {
         backgroundNode = self.childNode(withName: "backgroundNode") as? SKSpriteNode
-        wasteNode1 = backgroundNode.childNode(withName: "wasteNode1") as? SKSpriteNode
-        wasteNode2 = backgroundNode.childNode(withName: "wasteNode2") as? SKSpriteNode
-        oceanNode1 = backgroundNode.childNode(withName: "oceanNode1") as? SKSpriteNode
-        oceanNode2 = backgroundNode.childNode(withName: "oceanNode2") as? SKSpriteNode
-        oceanNode3 = backgroundNode.childNode(withName: "oceanNode3") as? SKSpriteNode
-        oceanNode4 = backgroundNode.childNode(withName: "oceanNode4") as? SKSpriteNode
-        canNode1 = backgroundNode.childNode(withName: "canNode1") as? SKSpriteNode
-        canNode2 = backgroundNode.childNode(withName: "canNode2") as? SKSpriteNode
-        bottleNode = backgroundNode.childNode(withName: "bottleNode") as? SKSpriteNode
-        oilNode = backgroundNode.childNode(withName: "oilNode") as? SKSpriteNode
-        fishNode1 = backgroundNode.childNode(withName: "fishNode1") as? SKSpriteNode
-        fishNode2 = backgroundNode.childNode(withName: "fishNode2") as? SKSpriteNode
-        fishNode3 = backgroundNode.childNode(withName: "fishNode3") as? SKSpriteNode
+        backgroundCrop = backgroundNode.childNode(withName: "backgroundCrop") as? SKSpriteNode
+        wasteNode1 = backgroundCrop.childNode(withName: "wasteNode1") as? SKSpriteNode
+        wasteNode2 = backgroundCrop.childNode(withName: "wasteNode2") as? SKSpriteNode
+        oceanNode1 = backgroundCrop.childNode(withName: "oceanNode1") as? SKSpriteNode
+        oceanNode2 = backgroundCrop.childNode(withName: "oceanNode2") as? SKSpriteNode
+        oceanNode3 = backgroundCrop.childNode(withName: "oceanNode3") as? SKSpriteNode
+        oceanNode4 = backgroundCrop.childNode(withName: "oceanNode4") as? SKSpriteNode
+        canNode1 = backgroundCrop.childNode(withName: "canNode1") as? SKSpriteNode
+        canNode2 = backgroundCrop.childNode(withName: "canNode2") as? SKSpriteNode
+        bottleNode = backgroundCrop.childNode(withName: "bottleNode") as? SKSpriteNode
+        oilNode = backgroundCrop.childNode(withName: "oilNode") as? SKSpriteNode
+        fishNode1 = backgroundCrop.childNode(withName: "fishNode1") as? SKSpriteNode
+        fishNode2 = backgroundCrop.childNode(withName: "fishNode2") as? SKSpriteNode
+        fishNode3 = backgroundCrop.childNode(withName: "fishNode3") as? SKSpriteNode
         backgroundNode.isPaused = false
         trashNodes = [wasteNode1, wasteNode2, canNode1, canNode2, oilNode, bottleNode]
+        cropBackground()
     }
     
     func triggerInitialActions() {

@@ -62,16 +62,6 @@ class AirScene: SKScene, CustomScene {
         cropBackground()
     }
     
-    private func cropBackground() {
-        let cropNode = SKCropNode()
-        cropNode.position = backgroundNode.position
-        cropNode.zPosition = 0
-        cropNode.maskNode = SKSpriteNode(color: .blue, size: backgroundNode.size)
-        backgroundCrop.removeFromParent()
-        cropNode.addChild(backgroundCrop)
-        backgroundNode.addChild(cropNode)
-    }
-    
     func triggerInitialActions() {
         animateSmoke()
     }
