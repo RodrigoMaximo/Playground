@@ -177,6 +177,8 @@ class GameScene: SKScene {
         }
         if let scene = customScene, customScene?.selectionNode.isPaused == false {
             scene.animateMoveToOrigin(duration: Constants.timeBetweenAnimations) {
+                self.labelNode.text = "Find all the problems related to environment and click them. Tap three cars, the factory, the chainsaw, the cut trees, and all the garbage in the ocean to help the Earth!"
+                self.textToSpeech(textLabel: self.labelNode)
                 self.isProcessingTouch = false
             }
             return true
